@@ -1,0 +1,114 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    // overflow: hidden;
+    // background-color: #333333;
+}
+
+li a, link{
+    float: left;
+}
+
+li a, link{
+    display: block;
+    text-align: center;
+    padding: 16px;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    text-decoration: none;
+    color: #0065b8;
+    cursor: pointer;
+}
+.mainUl li a:hover{
+    background: #0063b4;
+    color: #fff;
+    display: block;
+    text-align: center;
+    padding: 16px;
+    border: 1px solid lightgray;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 3px;
+    text-decoration: none;
+    cursor: pointer;
+}
+a {
+    transition: 0.5s;
+}
+html {
+    scroll-behavior: smooth;
+  }
+  .alphabet-block{
+    width: 100%;
+    float: left;
+    position: relative;
+    display: block;
+    margin: 0px;
+    padding: 10px;
+}
+.alphabet-block .letter {
+    float: left;
+    position: relative;
+    display: block;
+    font-weight: 600;
+    background: #0164b7;
+    color: #fff;
+    padding: 7px 10px 7px 10px;
+    z-index: 1;
+}
+.alphabet-block:after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 10px;
+    bottom: 0;
+    margin: auto;
+    // width: -webkit-calc(100% - 20px);
+    // width: -moz-calc(100% - 20px);
+    width: calc(100% - 20px);
+    height: 3px;
+    background: #0164b7;
+    display: block;
+}
+ul li.list-item{
+    width: 219px;
+    float: left;
+    position: relative;
+    display: table;
+    border-bottom: 1px dashed #dadada;
+    margin: 0px 15px 0px 0px;
+    letter-spacing: 1px;
+}
+.list-item .link {
+    border: none;
+    padding: 0%;
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    width: 160px; 
+    height: 1.2em; 
+    white-space: nowrap;
+    text-align: left;
+}
+.text{
+    position: relative;
+    z-index: 1;
+}
+section > ul > li > a {
+    margin: 0rem;
+    height: 2.2rem;
+    width: 13.6rem;
+    padding-left: 0.6rem;
+    padding-top: 0.3rem;
+}
+section > ul > li > a:hover {
+    background-color: #0065b8;
+    color: white;
+}
+.row {
+    scroll-behavior: smooth;
+  }

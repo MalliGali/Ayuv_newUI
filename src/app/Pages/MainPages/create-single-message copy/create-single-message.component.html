@@ -1,0 +1,160 @@
+<div class="container">
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+      <div class="card">
+        <div class="card-header" style="padding-top: 0;padding-left: 0.9rem;padding-right: 0.9rem;padding-bottom: 0; border-bottom: none;">
+          <div class="row" style="background-color: #0462c3; border-radius: 0 0 1rem 1rem; padding: 0.5rem;">
+            <div class="col text-center" style="padding-top: 0.2rem;">
+              <p style="color: #fff; font-size: 1.1rem; font-weight: 600; margin: 0;">Create Single Message Templates</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-body" style="padding: 1.8rem;">
+          <div class="row">
+            <div class="col">
+              <form [formGroup]="msgForm" (ngSubmit)='createAyuvMessage()'>
+                <div class="mb-3">
+                  <label for="title" class="form-label">Title<sup class="text-danger">*</sup></label>
+                  <input type="text" class="form-control" id="title" formControlName="mtsTitle" aria-describedby="title"
+                    placeholder="Title" [ngClass]="{ 'is-invalid': submitted && f.mtsTitle.errors }">
+                  <div *ngIf="submitted && f.mtsTitle.errors" class="invalid-feedback mb-0">
+                    <div *ngIf="f.mtsTitle.errors.required" class="text-center mb-0">Title is required
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="message" class="form-label">Message<sup class="text-danger">*</sup></label>
+                  <p>
+                    Dear John
+                  </p>
+                  <textarea cols="80" rows="5" [(ngModel)]="interaction.textValue" formControlName="mtsMsg"
+                    (ngModelChange)="onModelChange($event)" class="form-control" placeholder="Message Template Content"
+                    [ngClass]="{ 'is-invalid': submitted && f.mtsMsg.errors }"></textarea>
+                  <div class="row">
+                    <div class="col">
+                      <p>
+                        Thanks<br>
+                        {{username}}<br>
+                        GP_1
+                      </p>
+                    </div>
+                    <div class="col-8">
+                      <div class="row">
+                        <div class="col" *ngIf="remainingCharLeft <= 612">
+                          <p class="text-right w-100">{{remainingCharLeft}} total character typed, max <span
+                              style="color: #0ca6ee;">612</span>
+                          </p>
+                        </div>
+                        <div class="col" *ngIf="(remainingCharLeft > 612 || remainingCharLeft < 0)">
+                          <p class="text-right w-100"><span style="color: red;"><i
+                                class="far fa-times-circle"></i></span><i> Sorry, your message must be equal to or less
+                              than <span style="color: #0ca6ee;">612</span> characters(<span
+                                style="color: red;">{{remainingCharLeft}}</span>)
+                            </i>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="submitted && f.mtsMsg.errors" class="invalid-feedback mb-0">
+                    <div *ngIf="f.mtsMsg.errors.required" class="text-right mb-0">Message is required
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="position-relative form-check"><label class="form-check-label"><input type="checkbox"
+                        formControlName="mtsState" class="form-check-input">
+                      Accept one response from the Patient</label></div>
+                </div>
+                <div class="mb-3">
+                  <div class="row">
+                    <div class="col">
+                      <div class="position-relative form-group"><label for="exampleCustomSelect">Category<sup
+                            class="text-danger">*</sup></label><select type="select" id="exampleCustomSelect"
+                          name="customSelect" class="custom-select" (change)="getSelectedCategory($event)">
+                          <option selected>Select</option>
+                          <option value="Admin">Admin</option>
+                          <option value="Clinical">Clinical</option>
+                          <option value="Miscellaneous">Miscellaneous</option>
+                        </select></div>
+                    </div>
+                    <div class="col">
+                      <label for="">SNOMED Code<sup class="text-danger">*</sup></label>
+                      <div class="row" *ngIf="getDescription !== true">
+                        <div class="col-10">
+                          <ng-autocomplete [data]="snowmedCode" [searchKeyword]="keywordCode"
+                            placeholder="Enter the Snowmed Code" (selected)='selectEvent($event)'
+                            (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)'
+                            [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+                          </ng-autocomplete>
+
+                          <ng-template #itemTemplate let-item>
+                            <a [innerHTML]="item"></a>
+                          </ng-template>
+
+                          <ng-template #notFoundTemplate let-notFound>
+                            <div [innerHTML]="notFound"></div>
+                          </ng-template>
+                        </div>
+                        <div class="col-2 pt-2">
+                          <i class="fas fa-search" (click)="getBydesc()" style="cursor: pointer;"></i>
+                        </div>
+                      </div>
+                      <div class="row" *ngIf="getDescription === true">
+                        <div class="col-10">
+                          <ng-autocomplete [data]="snowmedDesc" [searchKeyword]="keywordDesc"
+                            placeholder="Enter the Snowmed Desc" (selected)='selectEvent($event)'
+                            (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)'
+                            [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+                          </ng-autocomplete>
+
+                          <ng-template #itemTemplate let-item>
+                            <a [innerHTML]="item"></a>
+                          </ng-template>
+
+                          <ng-template #notFoundTemplate let-notFound>
+                            <div [innerHTML]="notFound"></div>
+                          </ng-template>
+                        </div>
+                        <div class="col-2 pt-2">
+                          <i class="fas fa-search" (click)="getBydesc()" style="cursor: pointer;"></i>
+                        </div>
+                      </div>
+                      <!-- </div> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="row">
+                    <div class="col">
+                      <label class="form-label">Attachment</label>
+                        <input name="file" (change)="onMailAttach($event)" #fileUpload
+                        id="exampleFile"
+                        type="file"
+                        class="form-control-file">
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="row">
+                    <div class="col">
+                      <button type="button" class="btn btn-secondary" [routerLink]="['/singleMessage']"
+                        routerLinkActive="router-link-active">Cancel</button>
+                    </div>
+                    <div class="col text-right">
+                        <button type="submit" class="btn btn-primary"
+                        [disabled]="msgForm.invalid || remainingCharLeft > 612"
+                        [class.gray]="msgForm.invalid">Save</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-2"></div>
+  </div>
+</div>

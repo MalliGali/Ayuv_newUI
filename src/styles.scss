@@ -1,0 +1,161 @@
+@import "assets/base";
+
+.app-main__inner {
+    background-image: url(./assets/images/auv_bg.png);
+    background-position: center; /* Center the image */
+    background-color: white !important;
+    // background-repeat: no-repeat; /* Do not repeat the image */
+    // background-size: cover; /* Resize the background image to cover the entire container */
+}
+
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-single-message > div > div > div > div > div > div:nth-child(2) > div > ng2-smart-table > table > tbody > tr > td,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-interactive-message > div > div > div > div > div > div:nth-child(2) > div > ng2-smart-table > table > tbody > tr > td,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-schedule-message > div > div > div > div > div > div:nth-child(2) > div > ng2-smart-table > table > tbody > tr > td {
+    border: 1px solid lightgray;
+}
+
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-single-message > div > div > div > div,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-interactive-message > div > div > div > div,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-analytics > div > div > div,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-schedule-message > div > div > div > div,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-bulk-message > div > div > div > div,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-create-single-message > div > div > div > div,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-create-int-message > div > div > div.col-8 > div,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-edit-single-message > div > div > div.col-8 > div,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-edit-int-message > div > div > div.col-8 > div
+{
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.linkToTop {
+    border: none !important;
+    background-color: #fff !important;
+    cursor: pointer !important;
+    color: #033C73 !important;
+}
+.linkTopCol {
+    padding-left: 2.1rem !important;
+    padding-top: 0.5rem !important;
+}
+.btn-primary.disabled, .btn-primary:disabled {
+    color: #fff;
+    background-color: #7d7d7d;
+    border-color: #949494;
+}
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-single-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > thead > tr.ng2-smart-titles.ng-star-inserted > th.ng2-smart-th.SN.ng-star-inserted,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-interactive-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > thead > tr.ng2-smart-titles.ng-star-inserted > th.ng2-smart-th.mtsIMTitle.ng-star-inserted,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-schedule-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > thead > tr.ng2-smart-titles.ng-star-inserted > th.ng2-smart-th.SN.ng-star-inserted{
+    background-color: #cbe8ff !important;
+    color: black;
+}
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-single-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > thead > tr.ng2-smart-titles.ng-star-inserted > th.ng2-smart-th.mtsTitle.ng-star-inserted,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-interactive-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > thead > tr.ng2-smart-titles.ng-star-inserted > th.ng2-smart-th.mtsIMMsg.ng-star-inserted,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-schedule-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > thead > tr.ng2-smart-titles.ng-star-inserted > th.ng2-smart-th.mtshTitle.ng-star-inserted{
+    background-color: #ddf0ff !important;
+    color: black;
+}
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-single-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > thead > tr.ng2-smart-titles.ng-star-inserted > th.ng2-smart-th.mtsMsg.ng-star-inserted,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-interactive-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > thead > tr.ng2-smart-titles.ng-star-inserted > th.ng2-smart-th.mtsIMCreatedAt.ng-star-inserted,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-schedule-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > thead > tr.ng2-smart-titles.ng-star-inserted > th.ng2-smart-th.mtshMsg.ng-star-inserted { 
+
+    background-color: #cbe8ff !important;
+    color: black;
+}
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-single-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > thead > tr.ng2-smart-titles.ng-star-inserted > th.ng2-smart-th.mtsCreatedAt.ng-star-inserted,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-interactive-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > thead > tr.ng2-smart-titles.ng-star-inserted > th.ng2-smart-actions.ng-star-inserted,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-schedule-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > thead > tr.ng2-smart-titles.ng-star-inserted > th.ng2-smart-th.mtshCreatedAt.ng-star-inserted{
+    background-color: #ddf0ff !important;
+    color: black;
+}
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-single-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > thead > tr.ng2-smart-titles.ng-star-inserted > th.ng2-smart-actions.ng-star-inserted,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-schedule-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > thead > tr.ng2-smart-titles.ng-star-inserted > th.ng2-smart-actions.ng-star-inserted{
+    background-color: #cbe8ff !important;
+    color: black;
+}
+* {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+}
+.ng2-smart-sort-link,
+.ng2-smart-title{
+    text-decoration: none !important;
+    color: black !important;
+    font-weight: 600;
+}
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-single-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > tbody > tr:nth-child(n),
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-interactive-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > tbody > tr:nth-child(n),
+    body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-schedule-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > tbody > tr:nth-child(n){
+    border-bottom: 1px solid lightgray;
+    -webkit-box-shadow: 0 4px 4px -6px #222;
+    -moz-box-shadow: 0 4px 4px -6px #222;
+    box-shadow: 0 4px 4px -6px #222;
+}
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-single-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > tbody > tr:nth-child(n) > td:nth-child(2),
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-single-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > tbody > tr:nth-child(n) > td:nth-child(4),
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-interactive-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > tbody > tr:nth-child(n) > td:nth-child(2),
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-schedule-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > tbody > tr:nth-child(n) > td:nth-child(2),
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-interactive-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > tbody > tr:nth-child(n) > td:nth-child(4),
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-schedule-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > tbody > tr:nth-child(n) > td:nth-child(4) {
+    background-color: #f8f8f8 !important;
+}
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-single-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > tbody > tr:nth-child(n) > td.ng2-smart-actions.ng-star-inserted > ng2-st-tbody-custom > a > i,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-interactive-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > tbody > tr:nth-child(n) > td.ng2-smart-actions.ng-star-inserted > ng2-st-tbody-custom > a > i,
+    body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-schedule-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > tbody > tr:nth-child(n) > td.ng2-smart-actions.ng-star-inserted > ng2-st-tbody-custom > a > i{
+    font-size: 1.3rem;
+    margin-left: 2rem;
+    position: absolute;
+}
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-single-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > tbody > tr:nth-child(n) > td.ng2-smart-actions.ng-star-inserted > ng2-st-tbody-edit-delete > a> i,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-interactive-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > tbody > tr:nth-child(n) > td.ng2-smart-actions.ng-star-inserted > ng2-st-tbody-edit-delete > a> i,
+    body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-schedule-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > table > tbody > tr:nth-child(n) > td.ng2-smart-actions.ng-star-inserted > ng2-st-tbody-edit-delete > a> i{
+    font-size: 1.3rem;
+    margin-left: 5rem;
+    position: absolute;
+}
+
+.ng2-smart-action-delete-delete {
+    color: #ec6868 !important;
+}
+
+.autocomplete-container {
+    box-shadow: none !important;
+    position: relative !important;
+    overflow: visible !important;
+    height: 40px !important;
+}
+   
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-edit-single-message > div > div > div.col-8 > div > div.card-body > div > div > form > div:nth-child(4) > div > div:nth-child(2) > div,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-create-single-message > div > div > div.col-8 > div > div.card-body > div > div > form > div:nth-child(4) > div > div:nth-child(2) > div,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-edit-int-message > div > div > div.col-8 > div > div.card-body > div > div > form > div:nth-child(6) > div > div:nth-child(2) > div,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-create-int-message > div > div > div.col-8 > div > div.card-body > div > div > form > div:nth-child(6) > div > div:nth-child(2) > div{
+    border: 1px solid #0065b8 !important;
+    border-radius: 3px !important;
+}
+
+body > div > div.forms-container > div > form > div:nth-child(2) > input {
+    width: 90% !important;
+}
+
+body > app-root > app-login > div {
+    // background-color: #ffffff !important;
+    height: 99vh !important;
+    background: #ECE9E6;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FFFFFF, #ECE9E6);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FFFFFF, #ECE9E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#footer > div {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-single-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > ng2-smart-table-pager > nav,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-schedule-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > ng2-smart-table-pager > nav,
+    body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-interactive-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > ng2-smart-table-pager > nav{
+    width: 100% !important;
+    text-align: center !important;
+    margin-top: 1rem;
+}
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-single-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > ng2-smart-table-pager > nav > ul > li:nth-child(n) > a,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-interactive-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > ng2-smart-table-pager > nav > ul > li:nth-child(n) > a,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-schedule-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > ng2-smart-table-pager > nav > ul > li:nth-child(n) > a{
+    font-size: 100% !important;
+}

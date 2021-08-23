@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header" style="padding-top: 0;padding-left: 0.9rem;padding-right: 0.9rem;padding-bottom: 0;background-color: #ddf0ff;border-color: #ddf0ff;">
+          <div class="row" style="background-color: #0462c3; border-radius: 0 0 1rem 1rem; padding: 0.5rem;">
+            <div class="col" style="padding-top: 0.2rem;">
+              <p style="color: #fff; font-size: 1.1rem; font-weight: 600; margin: 0;">Single Message Templates</p>
+            </div>
+            <div class="col text-right">
+              <button type="button" class="btn text-white" style="background-color: #2d9eff !important;border-radius: 10rem; padding: 0.3rem 0.7rem 0.3rem 0.7rem;" [routerLink]="['/singleMessage/create']" routerLinkActive="router-link-active" > <i class="fas fa-user-plus text-white"></i> Create Single Message Template</button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body p-0">
+          <div class="row pb-3">
+            <div class="col">
+              <ng2-smart-table [settings]="settings" [source]="source" (userRowSelect)="onUserRowSelect($event)"
+              (custom)="onCustomAction($event)" (deleteConfirm)="onDeleteConfirm($event)"
+            ></ng2-smart-table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

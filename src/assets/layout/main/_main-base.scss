@@ -1,0 +1,20 @@
+// Main Base
+$assetPath :"../../images/ayuv_bg.png";
+
+.app-main__outer {
+  flex: 1;
+  flex-direction: column;
+  display: flex;
+  z-index: 8;
+  padding: 3.75rem 0 0 20rem;
+  transition: all .2s;
+}
+
+.app-main__inner {
+  padding: $grid-gutter-width $grid-gutter-width 0;
+  flex: 1;
+}
+
+// Themes
+
+@import "themes/main-white";

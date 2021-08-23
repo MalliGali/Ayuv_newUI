@@ -1,0 +1,143 @@
+<div class="container">
+  <div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+      <div class="card">
+        <div class="card-body" style="padding: 3rem;">
+          <div class="row">
+            <div class="col text-center">
+              <h4 style="color: #0073aa">Create Schedule Message Template</h4>
+            </div>
+            <hr>
+          </div>
+          <div class="row">
+            <div class="col">
+                <form [formGroup]="msgForm" (ngSubmit)='createAyuvScheduleMsg()'>
+                    <div class="mb-3">
+                        <label for="mtshTitle" class="form-label">Title<sup
+                                class="text-danger">*</sup></label>
+                        <input type="text" class="form-control" id="mtshTitle" formControlName="mtshTitle"
+                            aria-describedby="mtshTitle" placeholder="Title"
+                            [ngClass]="{ 'is-invalid': submitted && f.mtshTitle.errors }">
+                        <div *ngIf="submitted && f.mtshTitle.errors" class="invalid-feedback mb-0">
+                            <div *ngIf="f.mtshTitle.errors.required" class="text-right mb-0">Title is required
+                            </div>
+                        </div>
+                        <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col">
+                                <label for="mtshFreq">Frequency Of Messaging Patient<sup
+                                        class="text-danger">*</sup></label>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="position-relative form-group"><label for="mtsIMTitle">Message Count<sup
+                                          class="text-danger">*</sup></label><select type="select" formControlName="mtshMsgCount" id="mtsIMTitle" name="mtshMsgCount"
+                                        class="custom-select" (change)="getRepeatedTimes($event)"
+                                        (change)="selectChangeHandler($event)">
+                                        <option selected value="1">Select</option>
+                                            <option *ngFor="let msg of msgs; let i = index"
+                                                [value]="msgs[i].id">
+                                                {{msgs[i].id}}
+                                            </option>
+                                      </select></div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="position-relative form-group"><label for="mtshFreq">Message Frequency<sup
+                                          class="text-danger">*</sup></label><select type="select" formControlName="mtshFreq" id="mtshFreq" name="mtshFreq"
+                                        class="custom-select" (change)="getSelectedLimitTime($event)">
+                                        <option selected value="">Select</option>
+                                            <option *ngFor="let item of limitTimes; let i = index"
+                                                [value]="limitTimes[i].title">
+                                                {{limitTimes[i].title}}
+                                            </option>
+                                      </select></div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="position-relative form-group"><label for="mtshFreqPeriod">Message Frequency Period<sup
+                                          class="text-danger">*</sup></label><select type="select" formControlName="mtshFreqPeriod" id="mtshFreqPeriod" name="mtshFreqPeriod"
+                                        class="custom-select" (change)="selectChangeHandler1($event)">
+                                        <option selected value="">Select</option>
+                                            <option *ngFor="let msg of msgs; let i = index"
+                                                [value]="msgs[i].id">
+                                                {{msgs[i].id}}
+                                            </option>
+                                      </select></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3" formArrayName="mtshMsg">
+                        <table class="w-100">
+                            <tbody>
+                                <tr *ngFor="let item of mtshMsg().controls; let i = index"
+                                    [formGroupName]="i">
+                                    <td>
+                                        <label for="message" class="form-label">Message {{i + 1}}<sup
+                                                class="text-danger">*</sup></label>
+                                        <p>
+                                            Dear John
+                                        </p>
+                                        <textarea class="form-control" id="message"
+                                            formControlName="mstshMsg" rows="5"
+                                            (ngModelChange)="onModelChange($event, i)"
+                                            placeholder="Message {{i + 1}} Template Content"
+                                            (change)='getText($event, i)'>
+                                            </textarea>
+                                        <div class="row">
+                                            <div class="col">
+                                                <p id='time_{{i}}'></p>
+                                            </div>
+                                            <div class="col text-right">
+                                                <i class="fas fa-calendar-alt"></i>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <p>
+                                                    Thanks<br>
+                                                    {{username}}<br>
+                                                    GP_1
+                                                </p>
+                                            </div>
+                                            <div class="col-10 text-right">
+                                                <p class="text-right w-100" id="{{i}}">0 total character typed, max <span style="color: #0ca6ee;">612</span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col"><span class="w-100 text-danger text-center"
+                                                    id="time{{i}}"></span></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mb-3">
+                      <div class="position-relative form-check"><label class="form-check-label"><input type="checkbox"class="form-check-input">
+                      Accept one response from the Patient</label></div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col">
+                              <button type="button" class="btn btn-secondary"
+                                    [routerLink]="['/scheduleMessage']"
+                                    routerLinkActive="router-link-active">Cancel</button>
+                            </div>
+                            <div class="col text-right">
+                              <button type="submit" class="btn btn-primary" [disabled]="msgForm.invalid"
+                              [class.gray]="msgForm.invalid">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-2"></div>
+  </div>
+</div>
