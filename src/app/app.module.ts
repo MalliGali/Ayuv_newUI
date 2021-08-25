@@ -51,7 +51,6 @@ import {AnalyticsComponent} from './Pages/Dashboards/analytics/analytics.compone
 
 // Pages
 
-import {ForgotPasswordBoxedComponent} from './Pages/AuthPages/forgot-password-boxed/forgot-password-boxed.component';
 import {LoginBoxedComponent} from './Pages/AuthPages/login-boxed/login-boxed.component';
 import {RegisterBoxedComponent} from './Pages/AuthPages/register-boxed/register-boxed.component';
 
@@ -72,6 +71,7 @@ import { CreateIntMessageComponent } from './Pages/MainPages/create-int-message/
 import { CreateSchedMessageComponent } from './Pages/MainPages/create-sched-message/create-sched-message.component';
 import { EditSingleMessageComponent } from './Pages/MainPages/edit-single-message/edit-single-message.component';
 import { EditIntMessageComponent } from './Pages/MainPages/edit-int-message/edit-int-message.component';
+import { DialogComponent } from './Pages/MainPages/dialog/dialog.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -110,7 +110,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
     // User Pages
 
-    ForgotPasswordBoxedComponent,
     LoginBoxedComponent,
     RegisterBoxedComponent,
 
@@ -126,7 +125,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CreateIntMessageComponent,
     CreateSchedMessageComponent,
     EditSingleMessageComponent,
-    EditIntMessageComponent
+    EditIntMessageComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -165,6 +165,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     },
     ConfigActions,
   ],
+  entryComponents: [DialogComponent],
   bootstrap: [AppComponent]
 })
 

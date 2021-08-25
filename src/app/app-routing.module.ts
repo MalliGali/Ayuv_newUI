@@ -2,8 +2,6 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
 import {BaseLayoutComponent} from './Layout/base-layout/base-layout.component';
-import {PagesLayoutComponent} from './Layout/pages-layout/pages-layout.component';
-
 // DEMO PAGES
 
 // Dashboards
@@ -12,10 +10,7 @@ import {AnalyticsComponent} from './Pages/Dashboards/analytics/analytics.compone
 
 // Pages
 
-import {ForgotPasswordBoxedComponent} from './Pages/AuthPages/forgot-password-boxed/forgot-password-boxed.component';
 import {LoginBoxedComponent} from './Pages/AuthPages/login-boxed/login-boxed.component';
-import {RegisterBoxedComponent} from './Pages/AuthPages/register-boxed/register-boxed.component';
-
 
 import { SingleMessageComponent } from './Pages/MainPages/single-message/single-message.component';
 import { InteractiveMessageComponent } from './Pages/MainPages/interactive-message/interactive-message.component';
