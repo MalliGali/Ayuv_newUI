@@ -22,9 +22,7 @@ body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-
 body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-create-single-message > div > div > div > div,
 body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-create-int-message > div > div > div.col-8 > div,
 body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-edit-single-message > div > div > div.col-8 > div,
-body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-edit-int-message > div > div > div.col-8 > div,
-body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-single-message-sent > div > div > div.col-6 > div,
-body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-schedule-message-sent > div > div > div.col-10 > div.card
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-edit-int-message > div > div > div.col-8 > div
 {
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
@@ -161,5 +159,3 @@ body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-
 body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-schedule-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > ng2-smart-table-pager > nav > ul > li:nth-child(n) > a{
     font-size: 100% !important;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

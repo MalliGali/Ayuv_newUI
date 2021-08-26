@@ -18,12 +18,12 @@ import {animate, query, style, transition, trigger} from '@angular/animations';
             display: 'flex',
             flex: '1',
             transform: 'translateY(-20px)',
-            flexDirection: 'column',
+            flexDirection: 'column'
           }),
         ]),
         query(':enter', [
           animate('600ms ease', style({opacity: 1, transform: 'translateY(0)'})),
-        ],{ optional: true }),
+        ]),
 
         // query(':leave', [
         //   animate('600ms ease', style({opacity: 0, transform: 'translateY(-20px)'})),
