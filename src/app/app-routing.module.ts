@@ -32,6 +32,8 @@ import { EditSingleMessageComponent } from './Pages/MainPages/edit-single-messag
 import { EditIntMessageComponent } from './Pages/MainPages/edit-int-message/edit-int-message.component';
 import { PatientSingleMessageComponent } from './Pages/MainPages/patient-single-message/patient-single-message.component';
 import { ComposeSingleMessageComponent } from './Pages/MainPages/patient-single-message/compose-single-message/compose-single-message.component';
+import { PatientVideoMessageComponent } from './Pages/MainPages/patient-video-message/patient-video-message.component';
+import { ComposeVideoMessageComponent } from './Pages/MainPages/patient-video-message/compose-video-message/compose-video-message.component';
 
 
 const routes: Routes = [
@@ -56,6 +58,8 @@ const routes: Routes = [
       { path: 'ineractiveMessage/edit/:id', component: EditIntMessageComponent, data: { extraParameter: 'ineractiveMessage/edit/:id' } },
       { path: 'patientSingleMessage', component: PatientSingleMessageComponent, data: { extraParameter: 'patientSingleMessage' } },
       { path: 'patientSingleMessage/compose', component: ComposeSingleMessageComponent, data: { extraParameter: 'patientSingleMessage/compose' } },
+      { path: 'patientVideoMessage', component: PatientVideoMessageComponent, data: { extraParameter: 'patientVideoMessage' } },
+      { path: 'patientVideoMessage/compose', component: ComposeVideoMessageComponent, data: { extraParameter: 'patientVideoMessage/compose' } },
       { path: '**', redirectTo: 'dashboard' },
     ]
   },

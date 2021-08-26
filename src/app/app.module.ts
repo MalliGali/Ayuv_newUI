@@ -52,7 +52,7 @@ import { AnalyticsComponent } from './Pages/Dashboards/analytics/analytics.compo
 // Pages
 
 
-import { ForgotPasswordBoxedComponent } from './Pages/AuthPages/forgot-password-boxed/forgot-password-boxed.component';
+// import { ForgotPasswordBoxedComponent } from './Pages/AuthPages/forgot-password-boxed/forgot-password-boxed.component';
 import { LoginBoxedComponent } from './Pages/AuthPages/login-boxed/login-boxed.component';
 import { RegisterBoxedComponent } from './Pages/AuthPages/register-boxed/register-boxed.component';
 
@@ -77,6 +77,8 @@ import { EditIntMessageComponent } from './Pages/MainPages/edit-int-message/edit
 
 import { PatientSingleMessageComponent } from './Pages/MainPages/patient-single-message/patient-single-message.component';
 import { ComposeSingleMessageComponent } from './Pages/MainPages/patient-single-message/compose-single-message/compose-single-message.component';
+import { PatientVideoMessageComponent } from './Pages/MainPages/patient-video-message/patient-video-message.component';
+import { ComposeVideoMessageComponent } from './Pages/MainPages/patient-video-message/compose-video-message/compose-video-message.component';
 
 import { DialogComponent } from './Pages/MainPages/dialog/dialog.component';
 
@@ -135,7 +137,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     EditSingleMessageComponent,
     EditIntMessageComponent,
     PatientSingleMessageComponent,
-    ComposeSingleMessageComponent
+    ComposeSingleMessageComponent,
+    PatientVideoMessageComponent,
+    ComposeVideoMessageComponent,
     DialogComponent
   ],
   imports: [
