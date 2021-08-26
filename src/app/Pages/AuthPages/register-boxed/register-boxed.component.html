@@ -1,67 +1,674 @@
-<div class="h-100 bg-premium-dark">
-  <div class="d-flex h-100 justify-content-center align-items-center">
-    <div class="mx-auto app-login-box col-md-8">
-      <div class="app-logo-inverse mx-auto mb-3"></div>
-      <div class="modal-dialog w-100">
-        <div class="modal-content">
-          <div class="modal-body">
-            <h5 class="modal-title">
-              <h4 class="mt-2">
-                <div>Welcome,</div>
-                <span>It only takes a <span class="text-success">few seconds</span> to create your account</span></h4>
-            </h5>
-            <div class="divider"></div>
-            <div id="exampleInputGroup1" role="group" aria-describedby="exampleInputGroup1__BV_description_"
-                 class="form-group">
-              <div><input id="exampleInput1" type="email" placeholder="Enter email..." required="required"
-                          aria-required="true" class="form-control"
-                          aria-describedby="exampleInputGroup1__BV_description_">
-                <small tabindex="-1" id="exampleInputGroup1__BV_description_" class="form-text text-muted">We'll never
-                  share your email with anyone else.
-                </small>
-              </div>
-            </div>
-            <div id="exampleInputGroup12" role="group" class="form-group">
-              <div><input id="exampleInput12" type="text" placeholder="Enter username..." required="required"
-                          aria-required="true" class="form-control"></div>
-            </div>
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<!-- <div class="container-fluid">
+    <div class="row d-inline-flex w-100">
+        <div class="col-7 bg-1 d-block" style="padding-top: 5rem;">
             <div class="row">
-              <div class="col-md-6">
-                <div id="exampleInputGroup2" role="group" class="form-group">
-                  <div><input id="exampleInput2" type="password" placeholder="Enter password..." required="required"
-                              aria-required="true" class="form-control"></div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div id="exampleInputGroup2" role="group" class="form-group">
-                  <div><input id="exampleInput2" type="password" placeholder="Repeat password..." required="required"
-                              aria-required="true" class="form-control"></div>
-                </div>
-              </div>
+                <div class="col-3"> -->
+<!-- <h2>Ayuv</h2> -->
+<!-- </div> -->
+<!-- <div class="col-7"> -->
+<!-- <h1 class="t1">Ayuv</h1> -->
+<!-- </div> -->
+<!-- <div class="col"> -->
+<!-- <h2>Ayuv</h2> -->
+<!-- </div> -->
+<!-- </div> -->
+<div class="bg-img" style="height: 100vh;">
+  <div class="d-flex justify-content-center align-items-center" style="height: 82vh;">
+    <div class="mx-auto app-login-box col-md-8">
+      <div id="container">
+        <div id="header"></div>
+        <div id="body">
+          <div class="row mt-1">
+            <div class="col-lg text-right d-sm-none d-md-none d-xs-none d-lg-block" style="padding-top: 7rem;">
+              <img src="../../../../assets/images/ayuv_logo.png" class="img-fluid" alt="">
             </div>
-            <div class="custom-control custom-checkbox"><input id="exampleCheck" type="checkbox" name="check"
-                                                               autocomplete="off" class="custom-control-input"
-                                                               value="true"><label for="exampleCheck"
-                                                                                   class="custom-control-label">
-              Accept our <a [routerLink]="">Terms and Conditions</a>.
-            </label></div>
-            <div class="divider"></div>
-            <h6 class="mb-0">
-              Already have an account?
-              <a [routerLink]="" class="text-primary">Sign in</a>
-              |
-              <a [routerLink]="" class="text-primary">Recover
-                Password</a></h6></div>
-          <div class="modal-footer d-block text-center">
-            <button  type="button"
-                    class="btn btn-wide btn-pill btn-shadow btn-hover-shine btn-secondary btn-lg">Create Account
-            </button>
+            <div>
+
+            </div>
+            <div class="col-lg text-center d-sm-none d-md-none d-xs-none d-lg-block">
+              <img src="../../../../assets/images/rect.png" class="img-fluid" alt="">
+            </div>
+
+            <div _ngcontent-txt-c0="" class="col-lg col-sm-10 col-md-10 col-xs-10 mt-4">
+              <!-- <form  [formGroup]="userForm"> -->
+                <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                <h2 _ngcontent-txt-c0=""> Register</h2>
+
+                <!-- <div _ngcontent-txt-c0="" class="mt-2">
+                                <div _ngcontent-txt-c0="" class="inputWithIcon">
+                                  <input _ngcontent-txt-c0="" formcontrolname="username" placeholder="User Name" type="text" ng-reflect-name="username" class="ng-untouched ng-pristine ng-invalid"><i _ngcontent-txt-c0="" aria-hidden="true" class="fa fa-user fa-lg fa-fw"></i></div></div><div _ngcontent-txt-c0="" class="mt-2"><div _ngcontent-txt-c0="" class="inputWithIcon"><input _ngcontent-txt-c0="" formcontrolname="password" placeholder="Password" type="password" ng-reflect-name="password" class="ng-untouched ng-pristine ng-invalid"><i _ngcontent-txt-c0="" aria-hidden="true" class="fas fa-unlock-alt"></i></div></div><div _ngcontent-txt-c0="" class="row mt-4"><div _ngcontent-txt-c0="" class="col"><button _ngcontent-txt-c0="" class="btn btn-primary cstmBtn" type="submit">Login</button></div><div _ngcontent-txt-c0="" class="col pt-2 pl-2 pb-2 pr-2"><a _ngcontent-txt-c0="" href="#" style="text-decoration: none; font-size: 1rem; font-weight: 500;">Forgot Password ?</a></div></div><div _ngcontent-txt-c0="" class="row mt-3"><div _ngcontent-txt-c0="" class="col text-center"><hr _ngcontent-txt-c0="" class="dashed mb-3"><span _ngcontent-txt-c0="" style="font-size: 0.9rem; font-weight: 500">Looking to <a _ngcontent-txt-c0="" routerlinkactive="router-link-active" style="text-decoration: none;" ng-reflect-router-link="/reg" ng-reflect-router-link-active="router-link-active" href="/reg">Create an Account ?</a></span><hr _ngcontent-txt-c0="" class="dashed mt-3"></div></div></form></div> -->
+
+                <div class="row">
+
+                  <div class="col-sm-6">
+
+                    <div class="mt-2">
+
+
+                      <div class="inputWithIcon">
+
+                        <input matInput type="text" placeholder="First Name" formControlName="userFirstName"
+                          [ngClass]="{ 'is-invalid': submitted && f.username.errors }" required
+                          [errorStateMatcher]="matcher">
+                        <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
+                        <div *ngIf="f.userFirstName.invalid && f.userFirstName.touched">
+                          Please enter a valid First Name (e.g John)
+                        </div>
+                        <mat-error *ngIf="f.userFirstName.errors?.required">
+                          First Name is <strong>required</strong>
+                        </mat-error>
+
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="mt-2">
+
+                      <div class="inputWithIcon">
+                        <input matInput type="text" placeholder="Last Name" formControlName="userLastName"
+                          [ngClass]="{ 'is-invalid': submitted && f.userLastName.errors }" required
+                          [errorStateMatcher]="matcher">
+                        <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
+                        <div *ngIf="f.userLastName.invalid && f.userLastName.touched">
+                          Please enter a valid Last Name (e.g Smith)
+                        </div>
+                        <mat-error *ngIf="f.userLastName.errors?.required">
+                          Last Name is <strong>required</strong>
+                        </mat-error>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+
+
+                <!--                                   
+9959723699 -->
+
+                <!-- <div class="mt-2">
+                                    <label for="">Username:</label> 
+                                    <div class="inputWithIcon">
+                                      <input type="text" placeholder="General Practices" formControlName="general">
+                                      <i class="fas fa-user-nurse" aria-hidden="true"></i>
+                                    </div>
+                                  </div> -->
+
+
+                <div class="mt-2">
+                  <!-- <label for="">Username:</label> -->
+                  <div class="inputWithIcon">
+                    <mat-form-field class="w-100">
+                      <mat-label>GENERAL PRACTICES<sup style="color: red;">*</sup></mat-label>
+                      <mat-select [(value)]="selected1" (selectionChange)="selectedGp($event)">
+                          <div input value="Select">Select</div>
+                          <mat-option *ngFor="let item of gpData" value="{{item.gpId}}">{{item.gpName}}</mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="f.gpId.invalid && f.gpId.touched">
+                          Please Select Your GP ID
+                        </mat-error>
+                        <mat-error *ngIf="f.gpId.errors?.required">
+                          GP ID is <strong>required</strong>
+                        </mat-error>
+                  </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="mt-2">
+                  <!-- <label for="">Username:</label> -->
+                  <div class="inputWithIcon">
+                    <input matInput type="text" placeholder="UserName" formControlName="username"
+                      [ngClass]="{ 'is-invalid': submitted && f.username.errors }" required
+                      [errorStateMatcher]="matcher">
+                    <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
+                    <div *ngIf="f.username.invalid && f.username.touched">
+                      Please enter a valid UserName (e.g John)
+                    </div>
+                    <mat-error *ngIf="f.username.errors?.required">
+                      UserName is <strong>required</strong>
+                    </mat-error>
+                  </div>
+                </div>
+
+                <div class="row">
+
+                  <div class="col-sm-6">
+                    <div class="mt-2">
+                      <!-- <label for="">Username:</label> -->
+                      <div class="inputWithIcon">
+                        <input matInput type="text" placeholder="Email" formControlName="nhsEmailId"
+                          (ngModelChange)="validation($event)"
+                          [ngClass]="{'is-invalid': submitted && f.nhsEmailId.errors}" required
+                          [errorStateMatcher]="matcher">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        <mat-error *ngIf="f.nhsEmailId.untouched || (f.nhsEmailId.invalid && f.nhsEmailId.touched)">
+                          Please enter a valid email address (e.g ex@nhs.net ex@nhs.uk)
+                        </mat-error>
+                        <mat-error *ngIf="f.nhsEmailId.errors?.required">
+                          Email is <strong>required</strong>
+                        </mat-error>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <div class="mt-2">
+                      <!-- <label for="">Username:</label> -->
+                      <div class="inputWithIcon">
+                        <input matInput type="text" min="10" max="10" placeholder="phoneNumber"
+                          formControlName="phoneNumber" [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }"
+                          required [errorStateMatcher]="matcher">
+                        <i class="fa fa-phone" aria-hidden="true"></i>
+                        <mat-error *ngIf="f.phoneNumber.invalid && f.phoneNumber.touched">
+                          Please enter a valid Phone Number (e.g +44 0000 000 000)
+                        </mat-error>
+                        <mat-error *ngIf="f.phoneNumber.errors?.required">
+                          Phone Number is <strong>required</strong>
+                        </mat-error>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="row">
+
+                  <div class="col-sm-6">
+                    <div class="mt-2">
+                      <!-- <label for="">Username:</label> -->
+                      <div class="inputWithIcon">
+                        <input matInput type="password" placeholder="Password" formControlName="password"
+                          [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required
+                          [errorStateMatcher]="matcher">
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+                        <div *ngIf="f.password.untouched || (f.password.invalid && f.password.touched)">
+                          Password must be at least 6 characters
+                        </div>
+                        <mat-error *ngIf="f.password.errors?.required">
+                          Password is <strong>required</strong>
+                        </mat-error>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="mt-2">
+                      <!-- <label for="">Username:</label> -->
+                      <div class="inputWithIcon">
+                        <input matInput type="password" placeholder="Confirm Password" formControlName="cnfPassword"
+                          [errorStateMatcher]="matcher" required
+                          [ngClass]="{ 'is-invalid': submitted && f.cnfPassword.errors }">
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+                        <mat-error *ngIf="f.cnfPassword.errors?.required">
+                          Confirm Password is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="f.cnfPassword.errors?.mustMatch">Password must match</mat-error>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+              </form>
+
+              <div style="margin-top: 15px;" class="row">
+                <div class="col-sm-6">
+                  <button type="submit" class="btn btn-primary cstmBtn">Register</button>
+                </div>
+                <div style="text-align: right;" class="col-sm-6">
+                  <button type="cancel" class="btn btn-primary cstmBtn" [routerLink]="['/login']">Cancel</button>
+                </div>
+              </div>
+
+
+
+              <!-- <div _ngcontent-bbi-c0="" class="col-lg text-right d-sm-none d-md-none d-xs-none d-lg-block" style="padding-top: 7rem;"><img _ngcontent-bbi-c0="" alt="" class="img-fluid" src="../../../../assets/images/ayuv_logo.png"></div> -->
+
+
+
+              <!-- <div class="row" style="margin-top: 5rem;"> -->
+              <!-- <div class="col-3"> -->
+              <!-- <h2>Ayuv</h2> -->
+              <!-- </div> -->
+              <!-- <div class="col-7"> -->
+              <!-- <h1 class="t2">See your patients by video in minutes</h1> -->
+              <!-- </div> -->
+              <!-- <div class="col"> -->
+              <!-- <h2>Ayuv</h2> -->
+              <!-- </div> -->
+              <!-- </div> -->
+              <!-- <div class="row" style="margin-top: 2rem;"> -->
+              <!-- <div class="col-3"> -->
+              <!-- <h2>Ayuv</h2> -->
+              <!-- </div> -->
+              <!-- <div class="col-7"> -->
+              <!-- <h4 class="t3">Registering with Ayuv is easy. We just need a few details from you.</h4> -->
+              <!-- </div> -->
+              <!-- <div class="col"> -->
+              <!-- <h2>Ayuv</h2> -->
+              <!-- </div> -->
+              <!-- </div> -->
+              <!-- <div class="row" style="margin-top: 2rem;"> -->
+              <!-- <div class="col-3"> -->
+              <!-- <h2>Ayuv</h2> -->
+              <!-- </div> -->
+              <!-- <div class="col-7">
+                    <h4 class="t3">Your contact information will remain confidential and will not be shared with your
+                        patients.</h4>
+                </div> -->
+              <!-- <div class="col"> -->
+              <!-- <h2>Ayuv</h2> -->
+              <!-- </div> -->
+              <!-- </div> -->
+              <!-- </div> -->
+              <!-- <div class="col-lg col-sm-10 col-md-10 col-xs-10 mt-4">
+            <form [formGroup]="userForm" (ngSubmit)="onSubmit()"> -->
+              <!-- <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                    <h2>Register</h2> -->
+
+              <!-- <div class="row">
+                    <div class="col-5 text-end"> 
+                        <div class="mt-2"> -->
+              <!-- <label for="">Username:</label> -->
+
+              <!-- <div class="inputWithIcon">
+                               
+                              <input matInput type="text"  placeholder="First Name"  formControlName="userFirstName" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
+                              required [errorStateMatcher]="matcher" >
+                              <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
+                              <div *ngIf="f.userFirstName.invalid && f.userFirstName.touched">
+                                Please enter a valid First Name (e.g John)
+                              </div>
+                              <mat-error *ngIf="f.userFirstName.errors?.required">
+                                First Name is <strong>required</strong>
+                              </mat-error>
+                           
+                            </div>
+                          </div>
+                       
+                    </div> -->
+
+              <!-- <div class="col-5 text-end">
+                        <div class="mt-2"> -->
+              <!-- <label for="">Username:</label> -->
+              <!-- <div class="inputWithIcon">
+                              <input matInput type="text" placeholder="Last Name" formControlName="userLastName" [ngClass]="{ 'is-invalid': submitted && f.userLastName.errors }"
+                              required [errorStateMatcher]="matcher">
+                              <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
+                              <div *ngIf="f.userLastName.invalid && f.userLastName.touched">
+                                Please enter a valid Last Name (e.g Smith)
+                              </div>
+                              <mat-error *ngIf="f.userLastName.errors?.required">
+                                Last Name is <strong>required</strong>
+                              </mat-error>
+                            </div>
+                          </div>
+                    </div>
+                </div> -->
+              <!-- <div class="col-10">
+                        <div class="mt-2">
+                            <label for="">Username:</label> 
+                            <div class="inputWithIcon">
+                              <input type="text" placeholder="General Practices" formControlName="general">
+                              <i class="fas fa-user-nurse" aria-hidden="true"></i>
+                            </div>
+                          </div>
+                    </div> -->
+
+              <!-- <div class="row">
+                            <div class="col" style="padding-top: 0.53rem; padding-right: 0%;">
+                                <p style="font-size: 1.4rem;"><a style="text-decoration: none; color: #908484;"
+                                    [routerLink]="['/login']" routerLinkActive="router-link-active">Login</a></p>
+                            </div>
+                            <div class="col">
+                                <mat-tab-group mat-align-tabs="end">
+                                    <mat-tab label="Register"></mat-tab>
+                                </mat-tab-group>
+                            </div>
+                        </div>  -->
+
+              <!-- <div class="row mt-4"> 
+                        <div class="col">
+                        <div class="col">
+                            <mat-form-field class="w-100">
+                                <mat-label>GENERAL PRACTICES<sup style="color: red;">*</sup></mat-label>
+                                <mat-select [(value)]="selected1" (selectionChange)="selectedGp($event)">
+                                    <div input value="Select">Select</div>
+                                    <mat-option *ngFor="let item of gpData" value="{{item.gpId}}">{{item.gpName}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="f.gpId.invalid && f.gpId.touched">
+                                    Please Select Your GP ID
+                                  </mat-error>
+                                  <mat-error *ngIf="f.gpId.errors?.required">
+                                    GP ID is <strong>required</strong>
+                                  </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div> 
+                    </div> -->
+              <!-- <div class="col-10">
+                      <div class="mt-2"> -->
+              <!-- <label for="">Username:</label> -->
+              <!-- <div class="inputWithIcon">
+                            <input matInput type="text" placeholder="General Practices" formControlName="gpId" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
+                            required [errorStateMatcher]="matcher">
+                            <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
+                            <div *ngIf="f.gpId.invalid && f.username.touched">
+                              Please enter a valid gpId (e.g John)
+                            </div>
+                            <mat-error *ngIf="f.gpId.errors?.required">
+                              gpId is <strong>required</strong>
+                            </mat-error>
+                          </div>
+                        </div>
+                  </div>
+                    <div class="col-10">
+                        <div class="mt-2"> -->
+              <!-- <label for="">Username:</label> -->
+              <!-- <div class="inputWithIcon">
+                              <input matInput type="text" placeholder="UserName" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
+                              required [errorStateMatcher]="matcher">
+                              <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
+                              <div *ngIf="f.username.invalid && f.username.touched">
+                                Please enter a valid UserName (e.g John)
+                              </div>
+                              <mat-error *ngIf="f.username.errors?.required">
+                                UserName is <strong>required</strong>
+                              </mat-error>
+                            </div>
+                          </div>
+                    </div>
+                
+                 <div class="row mt-2">
+                    <div class="col-5 text-end">
+                        <div class="mt-2"> -->
+              <!-- <label for="">Username:</label> -->
+              <!-- <div class="inputWithIcon">
+                              <input matInput type="text" placeholder="Email" formControlName="nhsEmailId" (ngModelChange)="validation($event)"
+                              [ngClass]="{'is-invalid': submitted && f.nhsEmailId.errors}" required [errorStateMatcher]="matcher">
+                              <i class="fa fa-envelope" aria-hidden="true"></i>
+                              <mat-error *ngIf="f.nhsEmailId.untouched || (f.nhsEmailId.invalid && f.nhsEmailId.touched)">
+                                Please enter a valid email address (e.g ex@nhs.net ex@nhs.uk)
+                              </mat-error>
+                              <mat-error *ngIf="f.nhsEmailId.errors?.required">
+                                Email is <strong>required</strong>
+                              </mat-error>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="col-5 text-end">
+                        <div class="mt-2"> -->
+              <!-- <label for="">Username:</label> -->
+              <!-- <div class="inputWithIcon">
+                              <input matInput type="text" min="10" max="10" placeholder="phoneNumber" formControlName="phoneNumber" [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }"
+                              required [errorStateMatcher]="matcher">
+                              <i class="fa fa-phone" aria-hidden="true"></i>
+                              <mat-error *ngIf="f.phoneNumber.invalid && f.phoneNumber.touched">
+                                Please enter a valid Phone Number (e.g  +44 0000 000 000)
+                              </mat-error>
+                              <mat-error *ngIf="f.phoneNumber.errors?.required">
+                                Phone Number is <strong>required</strong>
+                              </mat-error>
+                            </div>
+                          </div>
+                    </div>
+                </div> 
+                <div class="row mt-2">
+                    <div class="col-5 text-end">
+                        <div class="mt-2"> -->
+              <!-- <label for="">Username:</label> -->
+              <!-- <div class="inputWithIcon">
+                              <input matInput type="text" placeholder="Password" formControlName="password"  [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                              required [errorStateMatcher]="matcher">
+                              <i class="fa fa-lock" aria-hidden="true"></i>
+                              <div *ngIf="f.password.untouched || (f.password.invalid && f.password.touched)">
+                                Password must be at least 6 characters
+                              </div>
+                              <mat-error *ngIf="f.password.errors?.required">
+                                Password is <strong>required</strong>
+                              </mat-error>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="col-5 text-end">
+                        <div class="mt-2"> -->
+              <!-- <label for="">Username:</label> -->
+              <!-- <div class="inputWithIcon">
+                              <input matInput type="text" placeholder="Confirm Password" formControlName="cnfPassword" [errorStateMatcher]="matcher"
+                              required [ngClass]="{ 'is-invalid': submitted && f.cnfPassword.errors }">
+                              <i class="fa fa-lock" aria-hidden="true"></i>
+                              <mat-error *ngIf="f.cnfPassword.errors?.required">
+                                Confirm Password is <strong>required</strong>
+                              </mat-error>
+                            <mat-error *ngIf="f.cnfPassword.errors?.mustMatch">Password must match</mat-error>
+                            </div>
+                          </div>
+                    </div>
+                </div>  -->
+              <!-- <div class="row mt-2">
+                    <div class="col-3"></div>
+                    <div class="col">
+                        <mat-form-field class="w-100">
+                            <mat-label class="active">COUNTRY<sup style="color: red;" appearance="standard">*</sup></mat-label>
+                            <mat-select  formControlName="country" ngClass="ng-touched">
+                                <mat-option value="Select">Select Country</mat-option>
+                                <mat-option value="option1">Option 1</mat-option>
+                                <mat-option value="option2">Option 2</mat-option>
+                                <mat-option value="option3">Option 3</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="f.country.invalid && f.country.touched">
+                                Please Select a country
+                              </mat-error>
+                              <mat-error *ngIf="f.country.untouched">
+                                Country is <strong>required</strong>
+                              </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-3"></div>
+                    <div class="col">
+                        <mat-form-field class="w-100">
+                            <mat-label>PROFESSION<sup style="color: red;">*</sup></mat-label>
+                            <mat-select [(value)]="selected" formControlName="profession">
+                                <mat-option value="Select">Select Profession</mat-option>
+                                <mat-option value="option1">Option 1</mat-option>
+                                <mat-option value="option2">Option 2</mat-option>
+                                <mat-option value="option3">Option 3</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="f.profession.invalid && f.profession.touched">
+                                Please Select Your Profession
+                              </mat-error>
+                              <mat-error *ngIf="f.profession.untouched">
+                                Profession is <strong>required</strong>
+                              </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-2"></div>
+                </div> -->
+
+
+
+
+              <!-- <div class="row mt-4">
+                    <div class="col-3"></div>
+                    <div class="col">
+                        <mat-form-field class="w-100" floatLabel="always">
+                            <mat-label>LAST NAME</mat-label>
+                            <input matInput placeholder="Ex. Doe" formControlName="userLastName" [ngClass]="{ 'is-invalid': submitted && f.userLastName.errors }"
+                             required [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="f.userLastName.invalid && f.userLastName.touched">
+                                Please enter a valid Last Name (e.g Smith)
+                              </mat-error>
+                              <mat-error *ngIf="f.userLastName.errors?.required">
+                                Last Name is <strong>required</strong>
+                              </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-3"></div>
+                    <div class="col">
+                        <mat-form-field class="w-100" floatLabel="always">
+                            <mat-label>USERNAME</mat-label>
+                            <input matInput placeholder="Ex. James" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
+                            required [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="f.username.invalid && f.username.touched">
+                                Please enter a valid UserName (e.g John)
+                              </mat-error>
+                              <mat-error *ngIf="f.username.errors?.required">
+                                UserName is <strong>required</strong>
+                              </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-3"></div>
+                    <div class="col">
+                        <mat-form-field class="w-100" floatLabel="always">
+                            <mat-label>PHONE NUMBER</mat-label>
+                            <input matInput type="number" min="10" max="10" placeholder="Ex. +44 0000 000 000" formControlName="phoneNumber" [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }"
+                             required [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="f.phoneNumber.invalid && f.phoneNumber.touched">
+                                Please enter a valid Phone Number (e.g Smith)
+                              </mat-error>
+                              <mat-error *ngIf="f.phoneNumber.errors?.required">
+                                Phone Number is <strong>required</strong>
+                              </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-3"></div>
+                    <div class="col">
+                        <mat-form-field class="w-100">
+                            <mat-label>GENERAL PRACTICES<sup style="color: red;">*</sup></mat-label>
+                            <mat-select [(value)]="selected1" (selectionChange)="selectedGp($event)">
+                                <mat-option value="Select">Select</mat-option>
+                                <mat-option *ngFor="let item of gpData" value="{{item.gpId}}">{{item.gpName}}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="f.gpId.invalid && f.gpId.touched">
+                                Please Select Your GP ID
+                              </mat-error>
+                              <mat-error *ngIf="f.gpId.errors?.required">
+                                GP ID is <strong>required</strong>
+                              </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-3"></div>
+                    <div class="col">
+                        <mat-form-field class="w-100" floatLabel="always">
+                            <mat-label>EMAIL</mat-label>
+                            <input matInput placeholder="Ex. example@nhs.net" formControlName="nhsEmailId" placeholder="Ex. example@nhs.net" (ngModelChange)="validation($event)"
+                            [ngClass]="{'is-invalid': submitted && f.nhsEmailId.errors}" required [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="f.nhsEmailId.untouched || (f.nhsEmailId.invalid && f.nhsEmailId.touched)">
+                                Please enter a valid email address (e.g ex@nhs.net ex@nhs.uk)
+                              </mat-error>
+                              <mat-error *ngIf="f.nhsEmailId.errors?.required">
+                                Email is <strong>required</strong>
+                              </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-3"></div>
+                    <div class="col">
+                        <mat-form-field class="w-100" floatLabel="always">
+                            <mat-label>CREATE A PASSWORD</mat-label>
+                            <input matInput type="password" placeholder="Ex. abc" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                            required [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="f.password.untouched || (f.password.invalid && f.password.touched)">
+                                Password must be at least 6 characters
+                              </mat-error>
+                              <mat-error *ngIf="f.password.errors?.required">
+                                Password is <strong>required</strong>
+                              </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-3"></div>
+                    <div class="col">
+                        <mat-form-field class="w-100" floatLabel="always">
+                            <mat-label>REPEAT YOUR PASSWORD</mat-label>
+                            <input matInput type="password" placeholder="Ex. abc" formControlName="cnfPassword" [errorStateMatcher]="matcher"
+                             required [ngClass]="{ 'is-invalid': submitted && f.cnfPassword.errors }">
+                              <mat-error *ngIf="f.cnfPassword.errors?.required">
+                                Confirm Password is <strong>required</strong>
+                              </mat-error>
+                            <mat-error *ngIf="f.cnfPassword.errors?.mustMatch">Password must match</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+                <div class="row mt-4 mb-3">
+                    <div class="col-3"></div>
+                    <div class="col">
+                        <mat-divider></mat-divider>
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col-3"></div>
+                    <div class="col">
+                        <h6 style="text-align: justify;">By registering you agree to the <b style="color: #0073aa">terms and conditions</b>
+                            and confirm you have read the <b style="color: #0073aa">privacy policy</b>.</h6>
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+                <div class="row mt-4 mb-5">
+                    <div class="col-3"></div>
+                    <div class="col">
+                        <button class="w-100" mat-flat-button color="primary" [disabled]="userForm.invalid && isValid === false">Submit</button>
+                    </div>
+                    <div class="col-2"></div>
+                </div> -->
+              <!-- </form> -->
+
+              <!-- <div class="row mt-4">
+                <div class="col">
+                  <button type="submit" class="btn btn-primary cstmBtn">Register</button>
+                </div>
+                <span style="font-size: 0.9rem; font-weight: 500">Looking to <a [routerLink]="['/login']" routerLinkActive="router-link-active"  style="text-decoration: none;">cancel registration</a></span>
+                <button  type="cancel" class="btn btn-primary cstmBtn" [routerLink]="['/login']">Cancel</button>
+
+                </div> -->
+
+
+
+              <!-- </form> -->
+            </div>
           </div>
         </div>
       </div>
-      <div class="text-center text-white opacity-8 mt-3">
-        Copyright © ArchitectUI 2019
+    </div>
+    <div style="    display: block;
+position: absolute;" id="footer">
+      <div class="row text-center pt-lg-4 pt-sm-3">
+        <div class="col-lg-3 col-sm-0"></div>
+        <div class="col-lg-6 col-sm-12">
+          <p class="p-0" style="font-size: 1rem; font-weight: 500; color: #000000">See your patients by video in minutes
+          </p>
+          <p class="p-0" style="font-size: 1rem; font-weight: 500; color: #000000">Registering with Ayuv is easy. We
+            just need a few details from you.</p>
+          <p class="p-0" style="font-size: 1rem; font-weight: 500; color: #000000">Your contact information will remain
+            confidential and will not be shared with your
+            patients.</p>
+        </div>
+        <div class="col-lg-3 col-sm-0"></div>
       </div>
     </div>
-  </div>
-</div>
+
+    <!-- </div> -->
+    <!-- </div>  -->
+    <!-- </div>  -->

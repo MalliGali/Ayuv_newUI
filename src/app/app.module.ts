@@ -8,6 +8,13 @@ import {rootReducer, ArchitectUIState} from './ThemeOptions/store';
 import {ConfigActions} from './ThemeOptions/store/config.actions';
 import {AppRoutingModule} from './app-routing.module';
 import {LoadingBarRouterModule} from '@ngx-loading-bar/router';
+//import { MatButtonModule, MatCheckboxModule } from '@angular/material';
+
+// import {
+//   MatButtonModule,
+//   MatInputModule,
+//   MatRippleModule
+// } from '@angular/material/form-field';
 
 import {CommonModule} from '@angular/common';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
@@ -54,6 +61,7 @@ import {AnalyticsComponent} from './Pages/Dashboards/analytics/analytics.compone
 import {ForgotPasswordBoxedComponent} from './Pages/AuthPages/forgot-password-boxed/forgot-password-boxed.component';
 import {LoginBoxedComponent} from './Pages/AuthPages/login-boxed/login-boxed.component';
 import {RegisterBoxedComponent} from './Pages/AuthPages/register-boxed/register-boxed.component';
+import { LoadingtwoComponent } from './Pages/AuthPages/loadingtwo/loadingtwo.component';
 
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 // Chart.js Examples
@@ -72,6 +80,11 @@ import { CreateIntMessageComponent } from './Pages/MainPages/create-int-message/
 import { CreateSchedMessageComponent } from './Pages/MainPages/create-sched-message/create-sched-message.component';
 import { EditSingleMessageComponent } from './Pages/MainPages/edit-single-message/edit-single-message.component';
 import { EditIntMessageComponent } from './Pages/MainPages/edit-int-message/edit-int-message.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -112,6 +125,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
     ForgotPasswordBoxedComponent,
     LoginBoxedComponent,
+    LoadingtwoComponent,
     RegisterBoxedComponent,
 
     // Main Pages Component
@@ -135,7 +149,17 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NgReduxModule,
     CommonModule,
     LoadingBarRouterModule,
-
+   // MatButtonModule,
+    //MatCheckboxModule,
+    MatTabsModule,
+  // MatButtonModule,
+  // MatFormFieldModule,
+  // MatInputModule,
+  //  MatRippleModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatSelectModule,
+  MatDividerModule,
     // Angular Bootstrap Components
 
     PerfectScrollbarModule,
@@ -147,7 +171,14 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     // Charts
     Ng2SmartTableModule,
     ChartsModule,
-    AutocompleteLibModule
+    AutocompleteLibModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
+    MatTabsModule,
+    MatDividerModule,
   ],
   providers: [
     {
@@ -163,6 +194,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       DEFAULT_PERFECT_SCROLLBAR_CONFIG,
       // DEFAULT_DROPZONE_CONFIG,
     },
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {floatLabel: 'always'}},
     ConfigActions,
   ],
   bootstrap: [AppComponent]
@@ -171,13 +203,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 export class AppModule {
   constructor(private ngRedux: NgRedux<ArchitectUIState>,
               private devTool: DevToolsExtension) {
-
     this.ngRedux.configureStore(
       rootReducer,
       {} as ArchitectUIState,
       [],
       [devTool.isEnabled() ? devTool.enhancer() : f => f]
     );
-
   }
 }

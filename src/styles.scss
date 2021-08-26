@@ -159,3 +159,5 @@ body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-
 body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-schedule-message > div > div > div > div > div.card-body.p-0 > div > div > ng2-smart-table > ng2-smart-table-pager > nav > ul > li:nth-child(n) > a{
     font-size: 100% !important;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
