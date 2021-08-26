@@ -1,7 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Message, AyuvMessage } from '../models/msg.model';
+import { Message, AyuvMessage} from '../models/msg.model';
 import { browserRefresh } from '../app.component';
 import { Router } from '@angular/router';
 import { environment } from '../models/environment';
@@ -31,33 +31,33 @@ export class MessageService implements OnInit {
     }
   }
 
-  getMsg() {
-    const user = JSON.parse(localStorage.getItem('user'));
-    const username = user.username;
-    const password = user.password;
+    getMsg() {
+        const user = JSON.parse(localStorage.getItem('user'));
+        const username = user.username;
+        const password = user.password;
 
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.httpClient.get<Message[]>(`${this.base_url}/getAllAyvuTemplateMessages`, { headers });
+        const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+        return this.httpClient.get<Message[]>(`${this.base_url}/getAllAyvuTemplateMessages`, {headers});
+    }
+
+    getMsgByGP() {
+      const user = JSON.parse(localStorage.getItem('user'));
+      const username = user.username;
+      const password = user.password;
+
+      const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+      return this.httpClient.get<Message[]>(`${this.base_url}/getAllTemplateMessagesByGP`, {headers});
   }
 
-  getMsgByGP() {
-    const user = JSON.parse(localStorage.getItem('user'));
-    const username = user.username;
-    const password = user.password;
+    public getMsgOne(id: string) {
+        // tslint:disable-next-line: variable-name
+        const user_cur = JSON.parse(localStorage.getItem('user'));
+        const username = user_cur.username;
+        const password = user_cur.password;
 
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.httpClient.get<Message[]>(`${this.base_url}/getAllTemplateMessagesByGP`, { headers });
-  }
-
-  public getMsgOne(id: string) {
-    // tslint:disable-next-line: variable-name
-    const user_cur = JSON.parse(localStorage.getItem('user'));
-    const username = user_cur.username;
-    const password = user_cur.password;
-
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.httpClient.get<Message[]>(`${this.base_url}/getAyvuTemplateMessage/${id}`, { headers });
-  }
+        const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+        return this.httpClient.get<Message[]>(`${this.base_url}/getAyvuTemplateMessage/${id}`, {headers});
+    }
 
 
   public DeleteMsg(msg: Message) {
@@ -67,7 +67,7 @@ export class MessageService implements OnInit {
     const password = user_cuur.password;
 
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.httpClient.delete<Message>(`${this.base_url}/deleteAyvuTemplateMessage/${msg.mtsID}`, { headers });
+    return this.httpClient.delete<Message>(`${this.base_url}/deleteAyvuTemplateMessage/${msg.mtsID}`, {headers});
   }
 
   public CreateMsg(msg: AyuvMessage): Observable<AyuvMessage> {
@@ -78,7 +78,7 @@ export class MessageService implements OnInit {
     const password = user_cuur.password;
 
     const headersCreate = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.httpClient.post<AyuvMessage>(`${this.base_url}/createSingleMessageTemplate`, msg, { headers: headersCreate });
+    return this.httpClient.post<AyuvMessage>(`${this.base_url}/createSingleMessageTemplate`, msg, {headers: headersCreate});
   }
 
   public UpdateMessage(msg: Message): Observable<Message> {
@@ -89,23 +89,15 @@ export class MessageService implements OnInit {
     const password = user_cuur.password;
 
     const headersCreate = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-    return this.httpClient.put<Message>(`${this.base_url}/updateAyvuTemplateMessage/${msg.mtsID}`, msg, { headers: headersCreate });
+    return this.httpClient.put<Message>(`${this.base_url}/updateAyvuTemplateMessage/${msg.mtsID}`, msg, {headers: headersCreate});
   }
 
-  sendMsg(data: any) {
+  sendMsg() {
     const user = JSON.parse(localStorage.getItem('user'));
     const username = user.username;
     const password = user.password;
 
-    let params = new HttpParams();
-    params = params.append('messageSms', data.messageSms);
-    params = params.append('mobileNumber', data.mobileNumber);
-    params = params.append('NHSNumber', data.NHSNumber);
-    params = params.append('templateId', data.templateId);
-    params = params.append('templateType', data.templateType);
-
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-
-    return this.httpClient.get(`${this.base_url}/sendSingleMessageTemplateToSMS`, { headers, params });
+    return this.httpClient.get(`${this.base_url}/sendSingleMessageTemplateToSMS`, {headers});
   }
 }
