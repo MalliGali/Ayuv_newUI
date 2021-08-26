@@ -170,4 +170,8 @@ export class ComposeSingleMessageComponent implements OnInit {
   onGoBack() {
     this.router.navigate(['/patientSingleMessage']);
   }
+
+  onNewTemplate() {
+    this.router.navigate(['/singleMessage/create']);
+  }
 }

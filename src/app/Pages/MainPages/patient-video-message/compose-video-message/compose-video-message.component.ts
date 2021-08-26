@@ -228,4 +228,8 @@ export class ComposeVideoMessageComponent implements OnInit {
       this.onMsgChange(this.message);
     })
   }
+
+  onNewTemplate() {
+    this.router.navigate(['/singleMessage/create']);
+  }
 }
