@@ -1,5 +1,4 @@
-[
-    {
+const patientDetails = [{
         "nhs_no": "7414451623",
         "patient_name": "Jens Curr",
         "dob": "13/08/2020"
@@ -4999,4 +4998,5 @@
         "patient_name": "Arte Rossin",
         "dob": "31/08/2020"
     }
-]
+];
+export default patientDetails;
