@@ -74,6 +74,8 @@ import { EditSingleMessageComponent } from './Pages/MainPages/edit-single-messag
 import { EditIntMessageComponent } from './Pages/MainPages/edit-int-message/edit-int-message.component';
 import { PatientSingleMessageComponent } from './Pages/MainPages/patient-single-message/patient-single-message.component';
 import { ComposeSingleMessageComponent } from './Pages/MainPages/patient-single-message/compose-single-message/compose-single-message.component';
+import { PatientVideoMessageComponent } from './Pages/MainPages/patient-video-message/patient-video-message.component';
+import { ComposeVideoMessageComponent } from './Pages/MainPages/patient-video-message/compose-video-message/compose-video-message.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -130,7 +132,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     EditSingleMessageComponent,
     EditIntMessageComponent,
     PatientSingleMessageComponent,
-    ComposeSingleMessageComponent
+    ComposeSingleMessageComponent,
+    PatientVideoMessageComponent,
+    ComposeVideoMessageComponent
   ],
   imports: [
     BrowserModule,
