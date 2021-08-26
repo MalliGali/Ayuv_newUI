@@ -163,7 +163,7 @@ export class ComposeVideoMessageComponent implements OnInit {
             // console.log(this.whereBy)
           }
           this.whereBy.roomUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.whereBy.roomUrl);
-          this.message = `I'm ready to start our Video Consult. Click the link below to join and wait for me to connect.\n\nPlease click the link to begain: ${this.whereBy.roomUrl.changingThisBreaksApplicationSecurity}\nGrove Medical Centre`;
+          this.message = `I'm ready to start our Video Consult. Click the link below to join and wait for me to connect.\n\nPlease click the link to begain: ${this.whereBy.roomUrl.changingThisBreaksApplicationSecurity}.`;
           this.onMsgChange(this.message);
           //// console.log(this.whereBy.roomUrl.changingThisBreaksApplicationSecurity);
           //// console.log(this.msgForm.value.messageSms.trim())
