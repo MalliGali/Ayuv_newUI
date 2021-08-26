@@ -42,7 +42,7 @@
     "ng2-completer": "^9.0.1",
     "ng2-smart-table": "^1.7.2",
     "ngx-perfect-scrollbar": "^7.2.1",
-    "node-sass": "^4.14.1",
+    "node-sass": "4.12.0",
     "pe7-icon": "^1.0.4",
     "redux": "4.0.0",
     "sweetalert2": "^9.11.0",
