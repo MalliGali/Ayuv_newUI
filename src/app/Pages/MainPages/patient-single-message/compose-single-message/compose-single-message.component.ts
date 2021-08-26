@@ -24,7 +24,7 @@ export class ComposeSingleMessageComponent implements OnInit {
   public msgData: any = [];
   public patientName: string;
   public dob: string;
-  private nhsNo: string = '6752926069';
+  public nhsNo: string = '6752926069';
   private templateId: any = '1';
   searchedData: any = [];
   user: any;
