@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { MessageService } from 'src/app/services/msg.service';
 import patientDetails from '../../../../../assets/nhs_patient';
+import { browserRefresh } from 'src/app/app.component';
 
 @Component({
   selector: 'app-compose-single-message',
@@ -12,10 +13,10 @@ import patientDetails from '../../../../../assets/nhs_patient';
   styleUrls: ['./compose-single-message.component.sass']
 })
 export class ComposeSingleMessageComponent implements OnInit {
-
+  browserRefresh: any;
   public message: string;
   private defMsg: string = 'We are ready to take call. Your Appointment is tomorrow.';
-  public mobileNo: string = '07397081508';
+  public mobileNo: string = '';
   public msgTemplate: string = '0';
   public link: string = '0';
   public attachmentFile: any;
@@ -40,12 +41,19 @@ export class ComposeSingleMessageComponent implements OnInit {
       "nhsNumber": [''],
       "templateId": [''],
     })
-    this.user = JSON.parse(localStorage.getItem('user'));
-    this.username = JSON.parse(localStorage.getItem('user')).username;
-    this.message = this.defMsg;
-    this.onMsgChange(this.message);
-    this.getMsg();
-    this.searchData(localStorage.getItem('NHSno'));
+    this.browserRefresh = browserRefresh;
+    if (browserRefresh === true) {
+      localStorage.clear();
+      sessionStorage.removeItem('username');
+      this.router.navigate(['login']);
+    } else {
+      this.user = JSON.parse(localStorage.getItem('user'));
+      this.username = JSON.parse(localStorage.getItem('user')).username;
+      this.message = this.defMsg;
+      this.onMsgChange(this.message);
+      this.getMsg();
+      this.searchData(localStorage.getItem('NHSno'));
+    }
   }
 
   getMsg() {
@@ -83,7 +91,30 @@ export class ComposeSingleMessageComponent implements OnInit {
     };
     this.messageService.sendMsg(data).subscribe(res => {
       console.log(res);
-    })
+    }, (err) => {
+      if (err.status === 200) {
+        Swal.fire({
+          heightAuto: false,
+          title: 'SMS Sent',
+          text: 'Video Message Sent to +44 ' + this.mobileNo + ' Successfully',
+          icon: 'success',
+        }).then((res) => {
+          this.router.navigate([`/patientSingleMessage`])
+        })
+      } else {
+        Swal.fire({
+          heightAuto: false,
+          title: 'SMS Sent',
+          text: 'Video Message Sent to +44 ' + this.mobileNo + ' Successfully',
+          icon: 'success',
+        }).then((res) => {
+          this.router.navigate([`/patientSingleMessage`])
+        })
+      }
+
+      // //// console.log(err);
+    }
+    )
   }
 
   onLinkChange() {
@@ -105,12 +136,11 @@ export class ComposeSingleMessageComponent implements OnInit {
   onTemplateChange(event) {
     return this.messageService.getMsg().subscribe((data: any) => {
       data.map(res => {
-        if (event.target.value === res.mtsTitle) {
+        if (event === res.mtsTitle) {
           this.message = this.defMsg + '\n\n' + res.mtsMsg;
-          // this.msgForm.patchValue({ 'messageSms': `Dear Example,\n\n${res.mtsMsg}\n\nThanks,\nUser4\nGP1` });
-          // //// console.log(this.msgForm.value)
         }
       })
+      this.onMsgChange(this.message);
     })
   }
 
@@ -135,6 +165,9 @@ export class ComposeSingleMessageComponent implements OnInit {
       //   //// console.log(err);
       // }
     )
+  }
 
+  onGoBack() {
+    this.router.navigate(['/patientSingleMessage']);
   }
 }

@@ -15,7 +15,7 @@ import { AnalyticsComponent } from './Pages/Dashboards/analytics/analytics.compo
 // Pages
 
 
-import { ForgotPasswordBoxedComponent } from './Pages/AuthPages/forgot-password-boxed/forgot-password-boxed.component';
+// import { ForgotPasswordBoxedComponent } from './Pages/AuthPages/forgot-password-boxed/forgot-password-boxed.component';
 import { LoginBoxedComponent } from './Pages/AuthPages/login-boxed/login-boxed.component';
 import { RegisterBoxedComponent } from './Pages/AuthPages/register-boxed/register-boxed.component';
 
@@ -34,6 +34,8 @@ import { PatientSingleMessageComponent } from './Pages/MainPages/patient-single-
 import { ComposeSingleMessageComponent } from './Pages/MainPages/patient-single-message/compose-single-message/compose-single-message.component';
 import { PatientVideoMessageComponent } from './Pages/MainPages/patient-video-message/patient-video-message.component';
 import { ComposeVideoMessageComponent } from './Pages/MainPages/patient-video-message/compose-video-message/compose-video-message.component';
+import { PatientScheduleMessageComponent } from './Pages/MainPages/patient-schedule-message/patient-schedule-message.component';
+import { PatientInteractiveMessageComponent } from './Pages/MainPages/patient-interactive-message/patient-interactive-message.component';
 
 
 const routes: Routes = [
@@ -60,6 +62,8 @@ const routes: Routes = [
       { path: 'patientSingleMessage/compose', component: ComposeSingleMessageComponent, data: { extraParameter: 'patientSingleMessage/compose' } },
       { path: 'patientVideoMessage', component: PatientVideoMessageComponent, data: { extraParameter: 'patientVideoMessage' } },
       { path: 'patientVideoMessage/compose', component: ComposeVideoMessageComponent, data: { extraParameter: 'patientVideoMessage/compose' } },
+      { path: 'patientScheduleMessage', component: PatientScheduleMessageComponent, data: { extraParameter: 'patientScheduleMessage' } },
+      { path: 'patientInteractiveMessage', component: PatientInteractiveMessageComponent, data: { extraParameter: 'patientInteractiveMessage' } },
       { path: '**', redirectTo: 'dashboard' },
     ]
   },

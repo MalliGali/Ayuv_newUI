@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import patientDetails from '../../../../../assets/nhs_patient';
 import { environment } from 'src/app/models/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { browserRefresh } from 'src/app/app.component';
 
 @Component({
   selector: 'app-compose-video-message',
@@ -14,10 +15,10 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
   styleUrls: ['./compose-video-message.component.sass']
 })
 export class ComposeVideoMessageComponent implements OnInit {
-
+  browserRefresh: any;
   public message: string;
   private defMsg: string = "I'm ready to start our Video Consult.Click the link below to join and wait for me to connect.";
-  public mobileNo: string = '07397081508';
+  public mobileNo: string = '';
   public patientName: string;
   public dob: string;
   public nhsNo: string = '';
@@ -26,6 +27,8 @@ export class ComposeVideoMessageComponent implements OnInit {
   public attachmentFile: any;
   public totalChars: number = 612;
   public remainingChars: number = 612;
+  public msgData: any = [];
+  private videochatLinkMessage: string;
 
   private templateId: any = '0';
   private msgForm: FormGroup;
@@ -52,14 +55,23 @@ export class ComposeVideoMessageComponent implements OnInit {
     //   "nhsNumber": [''],
     //   "templateId": [''],
     // })
-    this.user = JSON.parse(localStorage.getItem('user'));
-    this.username = JSON.parse(localStorage.getItem('user')).username;
-    this.message = this.defMsg;
-    this.searchData(localStorage.getItem('NHSno'));
-    // this.nhsNo = localStorage.getItem('NHSno');
-    this.onMsgChange(this.message);
-    this.getData();
-    // this.onMsgChange(this.message);
+    this.browserRefresh = browserRefresh;
+    if (browserRefresh === true) {
+      localStorage.clear();
+      sessionStorage.removeItem('username');
+      this.router.navigate(['login']);
+    } else {
+      this.user = JSON.parse(localStorage.getItem('user'));
+      this.username = JSON.parse(localStorage.getItem('user')).username;
+      this.message = this.defMsg;
+      this.searchData(localStorage.getItem('NHSno'));
+      // this.nhsNo = localStorage.getItem('NHSno');
+      this.onMsgChange(this.message);
+      this.getData();
+      this.getMsg();
+      // this.videochatLink = this.whereBy.roomUrl.changingThisBreaksApplicationSecurity;
+      // this.onMsgChange(this.message);
+    }
   }
 
   searchData(id) {
@@ -131,12 +143,22 @@ export class ComposeVideoMessageComponent implements OnInit {
           Swal.fire({
             heightAuto: false,
             title: 'SMS Sent',
-            text: `Video Message Sent to +44${this.mobileNo} Successfully`,
+            text: 'Video Message Sent to +44 ' + this.mobileNo + ' Successfully',
+            icon: 'success',
+          }).then((res) => {
+            this.router.navigate([`/patientVideoMessage`])
+          })
+        } else {
+          Swal.fire({
+            heightAuto: false,
+            title: 'SMS Sent',
+            text: 'Video Message Sent to +44 ' + this.mobileNo + ' Successfully',
             icon: 'success',
           }).then((res) => {
             this.router.navigate([`/patientVideoMessage`])
           })
         }
+
         // //// console.log(err);
       }
     );
@@ -164,6 +186,7 @@ export class ComposeVideoMessageComponent implements OnInit {
           }
           this.whereBy.roomUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.whereBy.roomUrl);
           this.message = `I'm ready to start our Video Consult. Click the link below to join and wait for me to connect.\n\nPlease click the link to begain: ${this.whereBy.roomUrl.changingThisBreaksApplicationSecurity}.`;
+          this.videochatLinkMessage = this.message;
           this.onMsgChange(this.message);
           //// console.log(this.whereBy.roomUrl.changingThisBreaksApplicationSecurity);
           //// console.log(this.msgForm.value.messageSms.trim())
@@ -172,4 +195,37 @@ export class ComposeVideoMessageComponent implements OnInit {
     })
   }
 
+
+  onGoBack() {
+    this.router.navigate(['/patientVideoMessage']);
+  }
+
+  getMsg() {
+    return this.messageService.getMsg().subscribe((res: any) => {
+      res.map(e => {
+        if (e.mtsState === true) {
+          // //// console.log(e);
+          this.msgData.push(e);
+          // this.templateId = e.mtsID;
+          // this.templateType = `NEW_MESSAGE`;
+          // this.msgForm.patchValue({ templateType: this.templateType })
+        }
+      })
+      // res.map(e => {
+
+      // })
+      // this.msgForm.patchValue({'sngMessage': res.})
+    })
+  }
+
+  onTemplateChange(event) {
+    return this.messageService.getMsg().subscribe((data: any) => {
+      data.map(res => {
+        if (event === res.mtsTitle) {
+          this.message = this.videochatLinkMessage + '\n\n' + res.mtsMsg;
+        }
+      })
+      this.onMsgChange(this.message);
+    })
+  }
 }
