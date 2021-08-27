@@ -31,7 +31,7 @@
                             <form #msgForm="ngForm">
                                 <div class="mb-3 form-group">
                                     <label for="mobileNo" class="form-label">Mobile No<sup class="text-danger">*</sup></label>
-                                    <input type="text" class="form-control" id="mobileNo" aria-describedby="mobileNo" placeholder="eg. 8511969798" required [(ngModel)]="mobileNo" [ngModelOptions]="{standalone: true}">
+                                    <input type="text" class="form-control" id="mobileNo" aria-describedby="mobileNo" placeholder="eg. 8511969798" required [(ngModel)]="mobileNo" [ngModelOptions]="{standalone: true}" minlength="10" maxlength="11">
                                     <!-- <div *ngIf="submitted && f.nhsNo.errors" class="invalid-feedback mb-0">
                                               <div *ngIf="f.nhsNo.errors.required" class="text-right mb-0">NHS No is required
                                               </div>
@@ -48,7 +48,7 @@
                                             </select>
                                         </div>
                                         <div class="col-3 text-right">
-                                            <button class="btn btn-primary"><i class="fas fa-file-medical"></i> New Template</button>
+                                            <button class="btn btn-primary" (click)="onNewTemplate()"><i class="fas fa-file-medical"></i> New Template</button>
                                         </div>
                                     </div>
                                     <!-- <div *ngIf="submitted && f.nhsNo.errors" class="invalid-feedback mb-0">
@@ -62,7 +62,7 @@
                                         <div class="col">
                                             <p>Dear {{patientName}},</p>
                                         </div>
-                                        <textarea type="text" class="form-control" rows="8" id="msg" name="msg" maxlength="612" class="form-control" [(ngModel)]="message" required (ngModelChange)='onMsgChange($event)'>
+                                        <textarea type="text" class="form-control" rows="8" id="msg" name="msg" [maxlength]="totalChars" class="form-control" [(ngModel)]="message" required (ngModelChange)='onMsgChange($event)'>
                                           </textarea>
                                     </div>
                                     <!-- <div *ngIf="submitted && f.dob.errors" class="invalid-feedback mb-0">
@@ -74,6 +74,10 @@
                                     <div class="row">
                                         <div class="col text-right">
                                             <p>{{remainingChars}} / {{totalChars}}</p>
+                                            <p *ngIf="remainingChars == 0 " class="text-end w-100"><span style="color: red;"><i class="far fa-times-circle"></i></span><i> Sorry, your message must be equal to or less
+                                                    than <span style="color: #0ca6ee;">{{totalChars}}</span> characters(<span style="color: red;">{{remainingChars}}</span>)
+                                                </i>
+                                            </p>
                                             <!-- <button type="submit" class="btn btn-primary" [disabled]="patientForm.invalid" [class.gray]="patientForm.invalid" (click)='searchPatient()'>Search Patient</button> -->
                                         </div>
                                     </div>
@@ -99,20 +103,24 @@
                                         <!-- <label class="form-label" for="customFile">Default file input example</label> -->
                                         <input type="file" class="form-control" id="customFile" (change)="onMailAttach($event)" />
                                     </div>
-                                    <div class="col">
-                                        <p>Thanks<br/>{{username}}<br/>GP1</p>
+                                </div>
+                                <div class="mb-2">
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="mt-2">Thanks<br/>{{username}}<br/>GP1</p>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="mb-2">
                                     <div class="row">
                                         <div class="col-4 text-right">
-                                            <button class="btn btn-secondary"><a [routerLink]="['/patientSingleMessage']"></a><i class="fas fa-arrow-circle-left"></i>  Go Back</button>
+                                            <button class="btn btn-secondary" (click)="onGoBack()"><i class="fas fa-arrow-circle-left"></i>  Go Back</button>
                                         </div>
                                         <div class="col-4 text-center">
                                             <button class="btn btn-light" (click)="onReset()"><i class="fas fa-redo-alt"></i> Reset</button>
                                         </div>
                                         <div class="col-4">
-                                            <button type="submit" class="btn btn-primary" [disabled]="msgForm.invalid" [class.gray]="msgForm.invalid" (click)="sendSingleMsg()"><i class="far fa-paper-plane"></i>  Send</button>
+                                            <button type="submit" class="btn btn-primary" [disabled]="msgForm.invalid || message == '' || mobileNo == '' " [class.gray]="msgForm.invalid" (click)="sendSingleMsg()"><i class="far fa-paper-plane"></i>  Send</button>
                                         </div>
                                         <!-- <div class="col-3"></div> -->
                                     </div>
