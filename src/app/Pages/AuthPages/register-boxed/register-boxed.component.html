@@ -33,7 +33,7 @@
             <div _ngcontent-txt-c0="" class="col-lg col-sm-10 col-md-10 col-xs-10 mt-4">
               <!-- <form  [formGroup]="userForm"> -->
                 <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-                <h2 _ngcontent-txt-c0=""> Register</h2>
+                <h2 > Register</h2>
 
                 <!-- <div _ngcontent-txt-c0="" class="mt-2">
                                 <div _ngcontent-txt-c0="" class="inputWithIcon">
@@ -209,17 +209,25 @@
                   </div>
 
                 </div>
+                <div style="margin-top: 15px;" class="row">
+                  <div class="col-sm-6">
+                    <button type="submit" class="btn btn-primary cstmBtn">Register</button>
+                  </div>
+                  <div style="text-align: right;" class="col-sm-6">
+                    <button type="cancel" class="btn btn-primary cstmBtn" [routerLink]="['/login']">Cancel</button>
+                  </div>
+                </div>
 
               </form>
 
-              <div style="margin-top: 15px;" class="row">
+              <!-- <div style="margin-top: 15px;" class="row">
                 <div class="col-sm-6">
                   <button type="submit" class="btn btn-primary cstmBtn">Register</button>
                 </div>
                 <div style="text-align: right;" class="col-sm-6">
                   <button type="cancel" class="btn btn-primary cstmBtn" [routerLink]="['/login']">Cancel</button>
                 </div>
-              </div>
+              </div> -->
 
 
 
@@ -653,7 +661,7 @@
       </div>
     </div>
     <div style="    display: block;
-position: absolute;" id="footer">
+    position: absolute;" id="footer">
       <div class="row text-center pt-lg-4 pt-sm-3">
         <div class="col-lg-3 col-sm-0"></div>
         <div class="col-lg-6 col-sm-12">
