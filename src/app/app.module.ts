@@ -83,6 +83,8 @@ import { PatientScheduleMessageComponent } from './Pages/MainPages/patient-sched
 import { PatientInteractiveMessageComponent } from './Pages/MainPages/patient-interactive-message/patient-interactive-message.component';
 
 import { DialogComponent } from './Pages/MainPages/dialog/dialog.component';
+import { ScheduleMessageSentComponent } from './Pages/MainPages/schedule-message-sent/schedule-message-sent.component';
+import { MatSnackBarModule } from '@angular/material';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -144,7 +146,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ComposeVideoMessageComponent,
     DialogComponent,
     PatientScheduleMessageComponent,
-    PatientInteractiveMessageComponent
+    PatientInteractiveMessageComponent,
+    ScheduleMessageSentComponent
   ],
   imports: [
     BrowserModule,
@@ -165,7 +168,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     // Charts
     Ng2SmartTableModule,
     ChartsModule,
-    AutocompleteLibModule
+    AutocompleteLibModule,
+    MatSnackBarModule
   ],
   providers: [
     {
