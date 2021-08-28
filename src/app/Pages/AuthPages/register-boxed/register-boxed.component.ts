@@ -121,9 +121,10 @@ export class RegisterBoxedComponent implements OnInit {
     if (this.userForm.invalid) {
         return;
     }
-    //  console.log(this.userForm.value);
-    this.userService.registerAyuvUser(this.userForm.value).subscribe(
+     console.log(this.userForm.value);
+    return this.userService.registerAyuvUser(this.userForm.value).subscribe(
       (res) => {
+        console.log(res);
         if(res) {
           this.isLoading = false;
         }
@@ -137,6 +138,7 @@ export class RegisterBoxedComponent implements OnInit {
         });
       },
       (err) => {
+        console.log(err);
         Swal.fire({
           heightAuto: false,
           title: `Error`,
