@@ -1,0 +1,153 @@
+<div class="container">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10 mb-3">
+            <div class="card">
+                <div class="card-header" style="padding-top: 0;padding-left: 0.9rem;padding-right: 0.9rem;padding-bottom: 0; border-bottom: none;">
+                    <div class="row" style="background-color: #0462c3; border-radius: 0 0 1rem 1rem; padding: 0.5rem;">
+                        <div class="col text-center" style="padding-top: 0.2rem;">
+                            <p style="color: #fff; font-size: 1.1rem; font-weight: 600; margin: 0;">Compose SMS Message</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" style="padding: 3rem;">
+                    <div class="row" style="border: #000000;">
+                        <div class="col-12">
+                            <p><b>Patient : {{patientName}}</b></p>
+                        </div>
+                        <div class="col-4">
+                            <p><b>NHS No: {{nhsNo}}</b></p>
+                        </div>
+                        <div class="col-4">
+                            <p><b>Born: {{dob}} </b></p>
+                        </div>
+                        <div class="col-4">
+                            <p><b>Gender: Not Specified</b></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+
+                            <form #msgForm="ngForm">
+                                <div class="mb-3 form-group">
+                                    <label for="mobileNo" class="form-label font-weight-bold">Mobile No<sup class="text-danger">*</sup></label>
+                                    <input type="text" class="form-control" id="mobileNo" #mobileNoModel="ngModel" aria-describedby="mobileNo" placeholder="eg. 8511969798" required [(ngModel)]="mobileNo" [ngModelOptions]="{standalone: true}" minlength="10" maxlength="10">
+                                    <div *ngIf="mobileNoModel.invalid && (mobileNoModel.dirty || mobileNoModel.touched)" class="invalid-feedback mb-0">
+                                        <div *ngIf="mobileNoModel.errors.required" class="text-right mb-0">Please Enter Mobile number
+                                        </div>
+                                        <div *ngIf="mobileNoModel.errors.minlength" class="text-right mb-0">
+                                            Please Enter a valid 10 digit Mobile Number
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3 form-group">
+                                    <label for="msgTemplate" class="form-label font-weight-bold">Message Templates<sup class="text-danger">*</sup></label>
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <select id="msgTemplate" name="msgTemplate" class="custom-select" [(ngModel)]="msgTemplate" [ngModelOptions]="{standalone: true}" (ngModelChange)="onTemplateChange($event)">
+                                               <option selected value="0">Select</option>
+                                               <option *ngFor="let item of msgData" value="{{item.mtsMsg}}">
+                                                {{item.mtsTitle}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-3 text-right">
+                                            <button class="btn btn-primary" (click)="onNewTemplate()"><i class="fas fa-file-medical"></i> New Template</button>
+                                        </div>
+                                    </div>
+                                    <!-- <div *ngIf="submitted && f.nhsNo.errors" class="invalid-feedback mb-0">
+                              <div *ngIf="f.nhsNo.errors.required" class="text-right mb-0">NHS No is required
+                              </div>
+                          </div> -->
+                                </div>
+                                <div class="mb-3">
+                                    <div class="form-group">
+                                        <label class="form-label font-weight-bold" for="dob">Message Text<sup class="text-danger">*</sup></label>
+                                        <div class="col">
+                                            <p>Dear {{patientName}},</p>
+                                        </div>
+                                        <textarea #msgModel="ngModel" type="text" class="form-control" rows="8" id="msg" name="msg" [maxlength]="totalChars" class="form-control" [(ngModel)]="message" required (ngModelChange)='onMsgChange($event)'>
+                                          </textarea>
+                                    </div>
+                                    <div *ngIf="msgModel.invalid && (msgModel.dirty || msgModel.touched)" class="invalid-feedback mb-0">
+                                        <div *ngIf="msgModel.errors.required" class="text-right mb-0">Please Enter Message
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-2">
+                                    <div class="row">
+                                        <div class="col text-right">
+                                            <p>{{remainingChars}} / {{totalChars}}</p>
+                                            <p *ngIf="remainingChars==0" class="text-end w-100"><span style="color: red;"><i class="far fa-times-circle"></i></span><i> Sorry, your message must be equal to or less
+                                                    than <span style="color: #0ca6ee;">{{totalChars}}</span> characters(<span style="color: red;">{{remainingChars}}</span>)
+                                                </i>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-2">
+                                    <div class="row">
+                                        <div class="custom-control custom-switch text-right">
+                                            <input type="checkbox" class="custom-control-input" id="customSwitch1" [(ngModel)]="acceptResponse" [ngModelOptions]="{standalone: true}">
+                                            <label class="custom-control-label" for="customSwitch1">Accept one response from the patient</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="mb-2">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <label for="link" class="form-label font-weight-bold">Link</label>
+                                        </div>
+                                        <div class="col-10">
+                                            <ng-autocomplete [data]="nhsLinks" [searchKeyword]="keywordDesc" placeholder="Enter the Link" (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+                                            </ng-autocomplete>
+
+                                            <ng-template #itemTemplate let-item>
+                                                <a [innerHTML]="item"></a>
+                                            </ng-template>
+
+                                            <ng-template #notFoundTemplate let-notFound>
+                                                <div [innerHTML]="notFound"></div>
+                                            </ng-template>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <!-- <div class="mb-2">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <label for="customFile" class="form-label font-weight-bold">Attachment</label>
+                                        </div>
+                                        <div class="col-10">
+                                            <input type="file" class="form-control form-control-file" id="customFile" (change)="onMailAttach($event)" />
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="mb-2">
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="mt-2">Thanks<br/>{{username}}<br/>GP1</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-2">
+                                    <div class="row">
+                                        <div class="col-4 text-right">
+                                            <button class="btn btn-secondary" (click)="onGoBack()"><i class="fas fa-arrow-circle-left"></i>  Go Back</button>
+                                        </div>
+                                        <div class="col-4 text-center">
+                                            <button class="btn btn-light" (click)="onReset()"><i class="fas fa-redo-alt"></i> Reset</button>
+                                        </div>
+                                        <div class="col-4">
+                                            <button type="submit" class="btn btn-primary" [disabled]="msgForm.invalid || message=='' || mobileNo==''" [class.gray]="msgForm.invalid" (click)="sendSingleMsg()"><i class="far fa-paper-plane"></i>  Send</button>
+                                        </div>
+                                        <!-- <div class="col-3"></div> -->
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+</div>

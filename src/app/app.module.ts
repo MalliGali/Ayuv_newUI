@@ -81,6 +81,7 @@ import { PatientVideoMessageComponent } from './Pages/MainPages/patient-video-me
 import { ComposeVideoMessageComponent } from './Pages/MainPages/patient-video-message/compose-video-message/compose-video-message.component';
 import { PatientScheduleMessageComponent } from './Pages/MainPages/patient-schedule-message/patient-schedule-message.component';
 import { PatientInteractiveMessageComponent } from './Pages/MainPages/patient-interactive-message/patient-interactive-message.component';
+import { ComposeInteractiveMessageComponent } from './Pages/MainPages/patient-interactive-message/compose-interactive-message/compose-interactive-message.component';
 
 import { DialogComponent } from './Pages/MainPages/dialog/dialog.component';
 
@@ -144,7 +145,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ComposeVideoMessageComponent,
     DialogComponent,
     PatientScheduleMessageComponent,
-    PatientInteractiveMessageComponent
+    PatientInteractiveMessageComponent,
+    ComposeInteractiveMessageComponent
   ],
   imports: [
     BrowserModule,
