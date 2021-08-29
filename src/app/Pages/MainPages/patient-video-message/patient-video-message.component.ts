@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import patientDetails from '../../../../assets/nhs_patient'
 
 @Component({
@@ -30,26 +31,17 @@ export class PatientVideoMessageComponent implements OnInit {
     }
   }
 
-  async searchData() {
-    // console.log(patientDetails);
-
-    // return this.http.get('../../../../assets/nhs_patient.json').subscribe(
-    //   (res: any) => {
-    patientDetails.map(async data => {
-      if (data.nhs_no === this.nhsNo && data.dob === this.dateAsYYYYMMDDHHNNSS(new Date(this.dob))) {
-        this.router.navigate([`patientVideoMessage/compose`]);
-        localStorage.setItem('NHSno', data.nhs_no);
-        // return await this.searchedData.push(data);
-      }
+  public searchData() {
+    let index = patientDetails.findIndex(person => person.nhs_no === this.nhsNo && person.dob === this.dateAsYYYYMMDDHHNNSS(new Date(this.dob)));
+    console.log(index);
+    if (index != -1) {
+      localStorage.setItem('NHSno', patientDetails[index].nhs_no);
+      this.router.navigate(['/patientVideoMessage/compose']);
+    } else {
+      Swal.fire('No User Found!')
     }
-      // );
-      // },
-      // (err) => {
-      //   //// console.log(err);
-      // }
-    )
-
   }
+
   dateAsYYYYMMDDHHNNSS(date): string {
     return this.leftpad(date.getDate(), 2)
       + '/' + this.leftpad(date.getMonth() + 1, 2)

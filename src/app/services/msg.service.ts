@@ -108,4 +108,13 @@ export class MessageService implements OnInit {
 
     return this.httpClient.get(`${this.base_url}/sendSingleMessageTemplateToSMS`, { headers, params });
   }
+
+  getNHSLinks() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const username = user.username;
+    const password = user.password;
+
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.httpClient.get(`${this.base_url}/getAllNHSLinkQueries`, { headers });
+  }
 }

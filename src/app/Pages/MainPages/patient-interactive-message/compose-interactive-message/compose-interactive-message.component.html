@@ -31,12 +31,16 @@
                             <form #msgForm="ngForm">
                                 <div class="mb-3 form-group">
                                     <label for="mobileNo" class="form-label font-weight-bold">Mobile No<sup class="text-danger">*</sup></label>
-                                    <input type="text" class="form-control" id="mobileNo" #mobileNoModel="ngModel" aria-describedby="mobileNo" placeholder="eg. 8511969798" required [(ngModel)]="mobileNo" [ngModelOptions]="{standalone: true}" minlength="10" maxlength="10">
-                                    <div *ngIf="mobileNoModel.invalid && (mobileNoModel.dirty || mobileNoModel.touched)" class="invalid-feedback mb-0">
-                                        <div *ngIf="mobileNoModel.errors.required" class="text-right mb-0">Please Enter Mobile number
+                                    <input type="text" class="form-control" id="mobileNo" #mobileNoModel="ngModel" aria-describedby="mobileNo" placeholder="eg. 8511969798" required [(ngModel)]="mobileNo" [ngModelOptions]="{standalone: true}" minlength="10" maxlength="10" pattern="\d{10}">
+                                    <div *ngIf="mobileNoModel.invalid && (mobileNoModel.dirty || mobileNoModel.touched)" class="mb-0">
+                                        <div *ngIf="mobileNoModel.errors?.required" class="text-right mb-0">
+                                            <span style="color: red;"><i class="far fa-times-circle"></i>Please Enter Mobile number</span>
                                         </div>
-                                        <div *ngIf="mobileNoModel.errors.minlength" class="text-right mb-0">
-                                            Please Enter a valid 10 digit Mobile Number
+                                        <div *ngIf="mobileNoModel.errors?.minlength && !mobileNoModel.errors?.required" class="text-right mb-0 ">
+                                            <span style="color: red;"><i class="far fa-times-circle"></i>Please Enter 10 digit Mobile Number</span>
+                                        </div>
+                                        <div *ngIf="mobileNoModel.invalid && !mobileNoModel.errors?.minlength && !mobileNoModel.errors?.required" class="text-right mb-0 ">
+                                            <span style="color: red;"><i class="far fa-times-circle"></i>Please Enter only numbers in Mobile Number</span>
                                         </div>
                                     </div>
                                 </div>
@@ -46,7 +50,7 @@
                                         <div class="col-9">
                                             <select id="msgTemplate" name="msgTemplate" class="custom-select" [(ngModel)]="msgTemplate" [ngModelOptions]="{standalone: true}" (ngModelChange)="onTemplateChange($event)">
                                                <option selected value="0">Select</option>
-                                               <option *ngFor="let item of msgData" value="{{item.mtsMsg}}">
+                                               <option *ngFor="let item of msgData" value="{{item.mtsTitle}}">
                                                 {{item.mtsTitle}}</option>
                                             </select>
                                         </div>
@@ -67,9 +71,10 @@
                                         </div>
                                         <textarea #msgModel="ngModel" type="text" class="form-control" rows="8" id="msg" name="msg" [maxlength]="totalChars" class="form-control" [(ngModel)]="message" required (ngModelChange)='onMsgChange($event)'>
                                           </textarea>
-                                    </div>
-                                    <div *ngIf="msgModel.invalid && (msgModel.dirty || msgModel.touched)" class="invalid-feedback mb-0">
-                                        <div *ngIf="msgModel.errors.required" class="text-right mb-0">Please Enter Message
+                                        <div *ngIf="msgModel.invalid && (msgModel.dirty || msgModel.touched)" class="mb-0">
+                                            <div *ngIf="msgModel.errors.required" class="text-right mb-0">
+                                                <span style="color: red;"><i class="far fa-times-circle"></i>Please Enter Message</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -86,9 +91,11 @@
                                 </div>
                                 <div class="mb-2">
                                     <div class="row">
-                                        <div class="custom-control custom-switch text-right">
-                                            <input type="checkbox" class="custom-control-input" id="customSwitch1" [(ngModel)]="acceptResponse" [ngModelOptions]="{standalone: true}">
-                                            <label class="custom-control-label" for="customSwitch1">Accept one response from the patient</label>
+                                        <div class="col">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" id="customSwitch1" [(ngModel)]="acceptResponse" [ngModelOptions]="{standalone: true}">
+                                                <label class="custom-control-label" for="customSwitch1">Accept one response from the patient</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -137,7 +144,7 @@
                                             <button class="btn btn-light" (click)="onReset()"><i class="fas fa-redo-alt"></i> Reset</button>
                                         </div>
                                         <div class="col-4">
-                                            <button type="submit" class="btn btn-primary" [disabled]="msgForm.invalid || message=='' || mobileNo==''" [class.gray]="msgForm.invalid" (click)="sendSingleMsg()"><i class="far fa-paper-plane"></i>  Send</button>
+                                            <button type="submit" class="btn btn-primary" [disabled]="msgForm.invalid || msgModel.invalid || mobileNoModel.invalid" [class.gray]="msgForm.invalid || msgModel.invalid || mobileNoModel.invalid" (click)="sendSingleMsg()"><i class="far fa-paper-plane"></i>  Send</button>
                                         </div>
                                         <!-- <div class="col-3"></div> -->
                                     </div>

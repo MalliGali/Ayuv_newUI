@@ -31,7 +31,7 @@ export class ComposeVideoMessageComponent implements OnInit {
   private videochatLinkMessage: string;
 
   private templateId: any = '0';
-  private msgForm: FormGroup;
+  // private msgForm: FormGroup;
   searchedData: any = [];
   user: any;
   username: any;
@@ -229,7 +229,7 @@ export class ComposeVideoMessageComponent implements OnInit {
     })
   }
 
-  onNewTemplate() {
-    this.router.navigate(['/singleMessage/create']);
-  }
+  // onNewTemplate() {
+  //   this.router.navigate(['/singleMessage/create']);
+  // }
 }

@@ -129,7 +129,7 @@ export class ComposeInteractiveMessageComponent implements OnInit {
 
   onTemplateChange(event) {
     this.msgData.forEach(data => {
-      if (data.mtsTitle === this.msgTemplate) {
+      if (data.mtsTitle === event) {
         this.message = this.message + '\n\n' + data.mtsMsg;
       }
     });

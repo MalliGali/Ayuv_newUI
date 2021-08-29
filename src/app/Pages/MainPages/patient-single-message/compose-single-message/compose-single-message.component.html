@@ -11,7 +11,7 @@
                     </div>
                 </div>
                 <div class="card-body" style="padding: 3rem;">
-                    <div class="row">
+                    <div class="row" style="border: #000000;">
                         <div class="col-12">
                             <p><b>Patient : {{patientName}}</b></p>
                         </div>
@@ -30,21 +30,29 @@
 
                             <form #msgForm="ngForm">
                                 <div class="mb-3 form-group">
-                                    <label for="mobileNo" class="form-label">Mobile No<sup class="text-danger">*</sup></label>
-                                    <input type="text" class="form-control" id="mobileNo" aria-describedby="mobileNo" placeholder="eg. 8511969798" required [(ngModel)]="mobileNo" [ngModelOptions]="{standalone: true}" minlength="10" maxlength="11">
-                                    <!-- <div *ngIf="submitted && f.nhsNo.errors" class="invalid-feedback mb-0">
-                                              <div *ngIf="f.nhsNo.errors.required" class="text-right mb-0">NHS No is required
-                                              </div>
-                                          </div> -->
+                                    <label for="mobileNo" class="form-label font-weight-bold">Mobile No<sup class="text-danger">*</sup></label>
+                                    <input type="text" #mobileNoModel="ngModel" class="form-control" id="mobileNo" aria-describedby="mobileNo" placeholder="eg. 8511969798" required [(ngModel)]="mobileNo" [ngModelOptions]="{standalone: true}" minlength="10" maxlength="10" pattern="\d{10}">
+                                    <div *ngIf="mobileNoModel.invalid && (mobileNoModel.dirty || mobileNoModel.touched)" class="mb-0">
+                                        <div *ngIf="mobileNoModel.errors?.required" class="text-right mb-0">
+                                            <span style="color: red;"><i class="far fa-times-circle"></i>Please Enter Mobile number</span>
+                                        </div>
+                                        <div *ngIf="mobileNoModel.errors?.minlength && !mobileNoModel.errors?.required" class="text-right mb-0 ">
+                                            <span style="color: red;"><i class="far fa-times-circle"></i>Please Enter 10 digit Mobile Number</span>
+                                        </div>
+                                        <div *ngIf="mobileNoModel.invalid && !mobileNoModel.errors?.minlength && !mobileNoModel.errors?.required" class="text-right mb-0 ">
+                                            <span style="color: red;"><i class="far fa-times-circle"></i>Please Enter only numbers in Mobile Number</span>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="mb-3 form-group">
-                                    <label for="msgTemplate" class="form-label">Message Templates<sup class="text-danger">*</sup></label>
+                                    <label for="msgTemplate" class="form-label font-weight-bold">Message Templates<sup class="text-danger">*</sup></label>
                                     <div class="row">
                                         <div class="col-9">
                                             <select id="msgTemplate" name="msgTemplate" class="custom-select" [(ngModel)]="msgTemplate" [ngModelOptions]="{standalone: true}" (ngModelChange)="onTemplateChange($event)">
                                                <option selected value="0">Select</option>
                                                <option *ngFor="let item of msgData" value="{{item.mtsTitle}}">
-                                                {{item.mtsTitle}}</option>
+                                                    {{item.mtsTitle}}
+                                                </option>
                                             </select>
                                         </div>
                                         <div class="col-3 text-right">
@@ -57,37 +65,57 @@
                           </div> -->
                                 </div>
                                 <div class="mb-3">
-                                    <div class=" form-group">
-                                        <label for="dob">Message Text<sup class="text-danger">*</sup></label>
+                                    <div class="form-group">
+                                        <label class="form-label font-weight-bold" for="dob">Message Text<sup class="text-danger">*</sup></label>
                                         <div class="col">
                                             <p>Dear {{patientName}},</p>
                                         </div>
-                                        <textarea type="text" class="form-control" rows="8" id="msg" name="msg" [maxlength]="totalChars" class="form-control" [(ngModel)]="message" required (ngModelChange)='onMsgChange($event)'>
+                                        <textarea type="text" #msgModel="ngModel" class="form-control" rows="8" id="msg" name="msg" [maxlength]="totalChars" class="form-control" [(ngModel)]="message" (ngModelChange)='onMsgChange($event)' required>
                                           </textarea>
+                                        <div *ngIf="msgModel.invalid && (msgModel.dirty || msgModel.touched)" class="mb-0">
+                                            <div *ngIf="msgModel.errors.required" class="text-right mb-0">
+                                                <span style="color: red;"><i class="far fa-times-circle"></i>Please Enter Message</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <!-- <div *ngIf="submitted && f.dob.errors" class="invalid-feedback mb-0">
-                              <div *ngIf="f.nhsNo.dob.required" class="text-right mb-0">DOB is required
-                              </div>
-                          </div> -->
                                 </div>
                                 <div class="mb-2">
                                     <div class="row">
                                         <div class="col text-right">
                                             <p>{{remainingChars}} / {{totalChars}}</p>
-                                            <p *ngIf="remainingChars == 0 " class="text-end w-100"><span style="color: red;"><i class="far fa-times-circle"></i></span><i> Sorry, your message must be equal to or less
+                                            <p *ngIf="remainingChars==0" class="text-end w-100"><span style="color: red;"><i class="far fa-times-circle"></i></span><i> Sorry, your message must be equal to or less
                                                     than <span style="color: #0ca6ee;">{{totalChars}}</span> characters(<span style="color: red;">{{remainingChars}}</span>)
                                                 </i>
                                             </p>
-                                            <!-- <button type="submit" class="btn btn-primary" [disabled]="patientForm.invalid" [class.gray]="patientForm.invalid" (click)='searchPatient()'>Search Patient</button> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-2">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" id="customSwitch1" [(ngModel)]="acceptResponse" [ngModelOptions]="{standalone: true}">
+                                                <label class="custom-control-label" for="customSwitch1">Accept one response from the patient</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="mb-2">
                                     <div class="row">
                                         <div class="col-2">
-                                            <label for="link" class="form-label">Link</label>
+                                            <label for="link" class="form-label font-weight-bold">Link</label>
                                         </div>
                                         <div class="col-10">
+                                            <!-- <ng-autocomplete [data]="nhsLinks" [searchKeyword]="nhsLinkDesc" placeholder="Enter the Link" (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+                                            </ng-autocomplete>
+
+                                            <ng-template #itemTemplate let-item>
+                                                <a [innerHTML]="item"></a>
+                                            </ng-template>
+
+                                            <ng-template #notFoundTemplate let-notFound>
+                                                <div [innerHTML]="notFound"></div>
+                                            </ng-template> -->
                                             <select class="form-control" [(ngModel)]="link" [ngModelOptions]="{standalone: true}" (change)="onLinkChange()">
                                               <option selected value="0">Select</option>
                                               <option value="Link 123">Link 123</option>
@@ -97,11 +125,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- </div> -->
                                 <div class="mb-2">
                                     <div class="row">
-                                        <!-- <label class="form-label" for="customFile">Default file input example</label> -->
-                                        <input type="file" class="form-control" id="customFile" (change)="onMailAttach($event)" />
+                                        <div class="col-2">
+                                            <label for="customFile" class="form-label font-weight-bold">Attachment</label>
+                                        </div>
+                                        <div class="col-10">
+                                            <!-- <label class="form-label" for="customFile">Default file input example</label> -->
+                                            <input type="file" class="form-control form-control-file" id="customFile" (change)="onMailAttach($event)" />
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="mb-2">
@@ -120,7 +152,7 @@
                                             <button class="btn btn-light" (click)="onReset()"><i class="fas fa-redo-alt"></i> Reset</button>
                                         </div>
                                         <div class="col-4">
-                                            <button type="submit" class="btn btn-primary" [disabled]="msgForm.invalid || message == '' || mobileNo == '' " [class.gray]="msgForm.invalid" (click)="sendSingleMsg()"><i class="far fa-paper-plane"></i>  Send</button>
+                                            <button type="submit" class="btn btn-primary" [disabled]="msgForm.invalid || msgModel.invalid || mobileNoModel.invalid" [class.gray]="msgForm.invalid || msgModel.invalid || mobileNoModel.invalid" (click)="sendSingleMsg()"><i class="far fa-paper-plane"></i>  Send</button>
                                         </div>
                                         <!-- <div class="col-3"></div> -->
                                     </div>

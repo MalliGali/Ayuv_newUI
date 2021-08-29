@@ -19,18 +19,22 @@ export class ComposeSingleMessageComponent implements OnInit {
   public mobileNo: string = '';
   public msgTemplate: string = '0';
   public link: string = '0';
+  public nhsLinks: any = [];
+  private nhsLinksData: any = [];
   public attachmentFile: any;
   public totalChars: number = 612;
   public remainingChars: number = 612;
   public msgData: any = [];
   public patientName: string;
   public dob: string;
-  public nhsNo: string = '6752926069';
+  public nhsNo: string = '';
   private templateId: any = '1';
   searchedData: any = [];
   user: any;
   username: any;
   private msgForm: FormGroup;
+  public nhsLinkDesc = 'NHS Link here';
+  public acceptResponse: boolean = false;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private messageService: MessageService, private http: HttpClient) { }
 
@@ -42,21 +46,24 @@ export class ComposeSingleMessageComponent implements OnInit {
       "templateId": [''],
     })
     this.browserRefresh = browserRefresh;
+    console.log(this.browserRefresh);
+
     if (browserRefresh === true) {
       localStorage.clear();
       sessionStorage.removeItem('username');
       this.router.navigate(['login']);
     } else {
-      this.user = JSON.parse(localStorage.getItem('user'));
-      this.username = JSON.parse(localStorage.getItem('user')).username;
+      // this.user = JSON.parse(localStorage.getItem('user'));
+      // this.username = JSON.parse(localStorage.getItem('user')).username;
       this.message = this.defMsg;
       this.onMsgChange(this.message);
-      this.getMsg();
+      this.getMsgTemplates();
+      this.getNHSLinks();
       this.searchData(localStorage.getItem('NHSno'));
     }
   }
 
-  getMsg() {
+  getMsgTemplates() {
     return this.messageService.getMsg().subscribe((res: any) => {
       res.map(e => {
         if (e.mtsState === true) {
@@ -71,6 +78,18 @@ export class ComposeSingleMessageComponent implements OnInit {
 
       // })
       // this.msgForm.patchValue({'sngMessage': res.})
+    })
+  }
+
+  getNHSLinks() {
+    console.log("getNHSLinks called");
+
+    return this.messageService.getNHSLinks().subscribe((res: any) => {
+      console.log(res);
+      this.nhsLinksData = res;
+      // res.map(e => {
+      //   this.nhsLinks.push(e);
+      // })
     })
   }
 
@@ -118,13 +137,13 @@ export class ComposeSingleMessageComponent implements OnInit {
   }
 
   onLinkChange() {
-    this.message = this.message + '\n\n' + this.link;
+    // this.message = this.message + '\n\n' + this.link;
     this.onMsgChange(this.message);
   }
 
   onReset() {
     this.message = this.defMsg;
-    this.link = '0';
+    // this.link = '0';
     this.msgTemplate = '0';
     this.onMsgChange(this.message);
   }
@@ -134,14 +153,26 @@ export class ComposeSingleMessageComponent implements OnInit {
   }
 
   onTemplateChange(event) {
-    return this.messageService.getMsg().subscribe((data: any) => {
-      data.map(res => {
-        if (event === res.mtsTitle) {
-          this.message = this.defMsg + '\n\n' + res.mtsMsg;
-        }
-      })
-      this.onMsgChange(this.message);
-    })
+    // console.log(event);
+    this.msgData.forEach(data => {
+      // console.log(data.mtsTitle);
+      // console.log(this.msgTemplate);
+      if (data.mtsTitle === event) {
+        // console.log("inside");
+
+        this.message = this.message + '\n\n' + data.mtsMsg;
+      }
+    });
+    // this.onMsgChange(this.message);
+    // return this.messageService.getMsg().subscribe((data: any) => {
+    //   data.map(res => {
+    //     if (event === res.mtsTitle) {
+    //       this.message = this.defMsg + '\n\n' + res.mtsMsg;
+    //     }
+    //   })
+    //   this.onMsgChange(this.message);
+    // })
+
   }
 
   searchData(id) {
@@ -173,5 +204,41 @@ export class ComposeSingleMessageComponent implements OnInit {
 
   onNewTemplate() {
     this.router.navigate(['/singleMessage/create']);
+  }
+
+  selectEvent(item) {
+    // this.nhsLinksData.forEach(element => {
+    //   if (item === element) {
+    //     this.message = this.message + '\n\n' + element;
+    //   } else if (item === element) {
+    //     this.message = this.message + '\n\n' + element;
+    //   }
+    //   this.onMsgChange(this.message);
+    // });
+    // // console.log(item)
+    // this.snoemedService.getSnowmedCodes().subscribe((res: any) => {
+    //   // console.log(res)
+    //   for (let i = 0; i < res.length; i++) {
+    //     if (item === res[i].snowMedCode) {
+    //       this.snowmedCode.push(res[i].snowMedCode);
+    //       this.msgForm.patchValue({ "smcId": res[i].smcId });
+    //     } else if (item === res[i].snowMedCodeDescription) {
+    //       this.snowmedCode.push(res[i].snowMedCode);
+    //       this.msgForm.patchValue({ "smcId": res[i].smcId });
+    //     }
+    //   }
+    // })
+    // this.msgForm.patchValue({ 'mtsCreatedAt': new Date().toISOString() });
+    // this.msgForm.patchValue({ 'mtsCreatedBy': this.username });
+    // this.msgForm.patchValue({ 'mtsFrom': this.username });
+    // this.msgForm.patchValue({ 'mtsLog': this.username });
+  }
+
+  onChangeSearch(val: string) {
+
+  }
+
+  onFocused(e) {
+
   }
 }

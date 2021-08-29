@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import patientDetails from '../../../../assets/nhs_patient'
 
 @Component({
   selector: 'app-patient-schedule-message',
@@ -12,7 +15,7 @@ export class PatientScheduleMessageComponent implements OnInit {
   public dob: string;
   searchedData: any = [];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
@@ -27,4 +30,23 @@ export class PatientScheduleMessageComponent implements OnInit {
     }
   }
 
+  public searchData() {
+    let index = patientDetails.findIndex(person => person.nhs_no === this.nhsNo && person.dob === this.dateAsYYYYMMDDHHNNSS(new Date(this.dob)));
+    console.log(index);
+    if (index != -1) {
+      Swal.fire('Screen Under Development!')
+    } else {
+      Swal.fire('No User Found!')
+    }
+  }
+
+  dateAsYYYYMMDDHHNNSS(date): string {
+    return this.leftpad(date.getDate(), 2)
+      + '/' + this.leftpad(date.getMonth() + 1, 2)
+      + '/' + date.getFullYear()
+  }
+  leftpad(val, resultLength = 2, leftpadChar = '0'): string {
+    return (String(leftpadChar).repeat(resultLength)
+      + String(val)).slice(String(val).length);
+  }
 }
