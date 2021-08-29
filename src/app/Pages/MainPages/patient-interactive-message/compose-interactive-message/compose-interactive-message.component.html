@@ -31,7 +31,7 @@
                             <form #msgForm="ngForm">
                                 <div class="mb-3 form-group">
                                     <label for="mobileNo" class="form-label font-weight-bold">Mobile No<sup class="text-danger">*</sup></label>
-                                    <input type="text" #mobileNoModel="ngModel" class="form-control" id="mobileNo" aria-describedby="mobileNo" placeholder="eg. 8511969798" required [(ngModel)]="mobileNo" [ngModelOptions]="{standalone: true}" minlength="10" maxlength="10" pattern="\d{10}">
+                                    <input type="text" class="form-control" id="mobileNo" #mobileNoModel="ngModel" aria-describedby="mobileNo" placeholder="eg. 8511969798" required [(ngModel)]="mobileNo" [ngModelOptions]="{standalone: true}" minlength="10" maxlength="10" pattern="\d{10}">
                                     <div *ngIf="mobileNoModel.invalid && (mobileNoModel.dirty || mobileNoModel.touched)" class="mb-0">
                                         <div *ngIf="mobileNoModel.errors?.required" class="text-right mb-0">
                                             <span style="color: red;"><i class="far fa-times-circle"></i>Please Enter Mobile number</span>
@@ -51,8 +51,7 @@
                                             <select id="msgTemplate" name="msgTemplate" class="custom-select" [(ngModel)]="msgTemplate" [ngModelOptions]="{standalone: true}" (ngModelChange)="onTemplateChange($event)">
                                                <option selected value="0">Select</option>
                                                <option *ngFor="let item of msgData" value="{{item.mtsTitle}}">
-                                                    {{item.mtsTitle}}
-                                                </option>
+                                                {{item.mtsTitle}}</option>
                                             </select>
                                         </div>
                                         <div class="col-3 text-right">
@@ -70,7 +69,7 @@
                                         <div class="col">
                                             <p>Dear {{patientName}},</p>
                                         </div>
-                                        <textarea type="text" #msgModel="ngModel" class="form-control" rows="8" id="msg" name="msg" [maxlength]="totalChars" class="form-control" [(ngModel)]="message" (ngModelChange)='onMsgChange($event)' required>
+                                        <textarea #msgModel="ngModel" type="text" class="form-control" rows="8" id="msg" name="msg" [maxlength]="totalChars" class="form-control" [(ngModel)]="message" required (ngModelChange)='onMsgChange($event)'>
                                           </textarea>
                                         <div *ngIf="msgModel.invalid && (msgModel.dirty || msgModel.touched)" class="mb-0">
                                             <div *ngIf="msgModel.errors.required" class="text-right mb-0">
@@ -100,13 +99,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mb-2">
+                                <!-- <div class="mb-2">
                                     <div class="row">
                                         <div class="col-2">
                                             <label for="link" class="form-label font-weight-bold">Link</label>
                                         </div>
                                         <div class="col-10">
-                                            <!-- <ng-autocomplete [data]="nhsLinks" [searchKeyword]="nhsLinkDesc" placeholder="Enter the Link" (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+                                            <ng-autocomplete [data]="nhsLinks" [searchKeyword]="keywordDesc" placeholder="Enter the Link" (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
                                             </ng-autocomplete>
 
                                             <ng-template #itemTemplate let-item>
@@ -115,27 +114,20 @@
 
                                             <ng-template #notFoundTemplate let-notFound>
                                                 <div [innerHTML]="notFound"></div>
-                                            </ng-template> -->
-                                            <select class="form-control" [(ngModel)]="link" [ngModelOptions]="{standalone: true}" (change)="onLinkChange()">
-                                              <option selected value="0">Select</option>
-                                              <option value="Link 123">Link 123</option>
-                                              <option value="Link 456">Link 456</option>
-                                              <option value="Link 789">Link 789</option>
-                                            </select>
+                                            </ng-template>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="mb-2">
+                                </div> -->
+                                <!-- <div class="mb-2">
                                     <div class="row">
                                         <div class="col-2">
                                             <label for="customFile" class="form-label font-weight-bold">Attachment</label>
                                         </div>
                                         <div class="col-10">
-                                            <!-- <label class="form-label" for="customFile">Default file input example</label> -->
                                             <input type="file" class="form-control form-control-file" id="customFile" (change)="onMailAttach($event)" />
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="mb-2">
                                     <div class="row">
                                         <div class="col">

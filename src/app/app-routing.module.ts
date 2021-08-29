@@ -36,6 +36,7 @@ import { PatientVideoMessageComponent } from './Pages/MainPages/patient-video-me
 import { ComposeVideoMessageComponent } from './Pages/MainPages/patient-video-message/compose-video-message/compose-video-message.component';
 import { PatientScheduleMessageComponent } from './Pages/MainPages/patient-schedule-message/patient-schedule-message.component';
 import { PatientInteractiveMessageComponent } from './Pages/MainPages/patient-interactive-message/patient-interactive-message.component';
+import { ComposeInteractiveMessageComponent } from './Pages/MainPages/patient-interactive-message/compose-interactive-message/compose-interactive-message.component';
 import { ScheduleMessageSentComponent } from './Pages/MainPages/schedule-message-sent/schedule-message-sent.component';
 
 
@@ -70,6 +71,7 @@ const routes: Routes = [
       { path: 'patientScheduleMessage', component: PatientScheduleMessageComponent, data: { extraParameter: 'patientScheduleMessage' } },
       { path: 'patientScheduleMessage1', component: ScheduleMessageSentComponent, data: { extraParameter: 'patientScheduleMessage1' } },
       { path: 'patientInteractiveMessage', component: PatientInteractiveMessageComponent, data: { extraParameter: 'patientInteractiveMessage' } },
+      { path: 'patientInteractiveMessage/compose', component: ComposeInteractiveMessageComponent, data: { extraParameter: 'patientInteractiveMessage/compose' } },
       { path: '**', redirectTo: 'dashboard' },
     ]
   },

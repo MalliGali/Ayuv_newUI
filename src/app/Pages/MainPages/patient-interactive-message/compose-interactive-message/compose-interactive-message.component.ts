@@ -1,27 +1,28 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Router, RouterModule } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import Swal from 'sweetalert2';
-import { MessageService } from 'src/app/services/msg.service';
-import patientDetails from '../../../../../assets/nhs_patient';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { browserRefresh } from 'src/app/app.component';
+import { MessageService } from 'src/app/services/msg.service';
+import Swal from 'sweetalert2';
+import patientDetails from '../../../../../assets/nhs_patient';
 
 @Component({
-  selector: 'app-compose-single-message',
-  templateUrl: './compose-single-message.component.html',
-  styleUrls: ['./compose-single-message.component.sass']
+  selector: 'app-compose-interactive-message',
+  templateUrl: './compose-interactive-message.component.html',
+  styleUrls: ['./compose-interactive-message.component.sass']
 })
-export class ComposeSingleMessageComponent implements OnInit {
+export class ComposeInteractiveMessageComponent implements OnInit {
+
   browserRefresh: any;
   public message: string;
   private defMsg: string = 'We are ready to take call. Your Appointment is tomorrow.';
   public mobileNo: string = '';
   public msgTemplate: string = '0';
-  public link: string = '0';
-  public nhsLinks: any = [];
-  private nhsLinksData: any = [];
-  public attachmentFile: any;
+  // public link: string = '0';
+  // public nhsLinks: any = [];
+  // private nhsLinksData: any = [];
+  // public attachmentFile: any;
   public totalChars: number = 612;
   public remainingChars: number = 612;
   public msgData: any = [];
@@ -32,33 +33,30 @@ export class ComposeSingleMessageComponent implements OnInit {
   searchedData: any = [];
   user: any;
   username: any;
-  private msgForm: FormGroup;
-  public nhsLinkDesc = 'NHS Link here';
   public acceptResponse: boolean = false;
+  // private msgForm: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private messageService: MessageService, private http: HttpClient) { }
 
   ngOnInit() {
-    this.msgForm = this.formBuilder.group({
-      "mobileNumber": ['', Validators.required],
-      "messageSms": ['', Validators.required],
-      "nhsNumber": [''],
-      "templateId": [''],
-    })
+    // this.msgForm = this.formBuilder.group({
+    //   "mobileNumber": ['', Validators.required],
+    //   "messageSms": ['', Validators.required],
+    //   "nhsNumber": [''],
+    //   "templateId": [''],
+    // })
     this.browserRefresh = browserRefresh;
-    console.log(this.browserRefresh);
-
     if (browserRefresh === true) {
       localStorage.clear();
       sessionStorage.removeItem('username');
       this.router.navigate(['login']);
     } else {
-      // this.user = JSON.parse(localStorage.getItem('user'));
-      // this.username = JSON.parse(localStorage.getItem('user')).username;
+      this.user = JSON.parse(localStorage.getItem('user'));
+      this.username = JSON.parse(localStorage.getItem('user')).username;
       this.message = this.defMsg;
       this.onMsgChange(this.message);
       this.getMsgTemplates();
-      this.getNHSLinks();
+      // this.getNHSLinks();
       this.searchData(localStorage.getItem('NHSno'));
     }
   }
@@ -81,24 +79,6 @@ export class ComposeSingleMessageComponent implements OnInit {
     })
   }
 
-  getNHSLinks() {
-    console.log("getNHSLinks called");
-
-    return this.messageService.getNHSLinks().subscribe((res: any) => {
-      console.log(res);
-      this.nhsLinksData = res;
-      // res.map(e => {
-      //   this.nhsLinks.push(e);
-      // })
-    })
-  }
-
-  onMailAttach(event) {
-    if (event.target.files.length > 0) {
-      this.attachmentFile = event.target.files[0];
-    }
-  }
-
   sendSingleMsg() {
     let finalMessage: string = 'Dear ' + this.patientName + ',\n\n' + this.message + '\n\nThanks,\n' + this.username + ',\nGP1.';
     let data: any = {
@@ -118,7 +98,7 @@ export class ComposeSingleMessageComponent implements OnInit {
           text: 'Video Message Sent to +44 ' + this.mobileNo + ' Successfully',
           icon: 'success',
         }).then((res) => {
-          this.router.navigate([`/patientSingleMessage`])
+          this.router.navigate([`/patientInteraciveMessage`])
         })
       } else {
         Swal.fire({
@@ -127,18 +107,13 @@ export class ComposeSingleMessageComponent implements OnInit {
           text: 'Video Message Sent to +44 ' + this.mobileNo + ' Successfully',
           icon: 'success',
         }).then((res) => {
-          this.router.navigate([`/patientSingleMessage`])
+          this.router.navigate([`/patientInteraciveMessage`])
         })
       }
 
       // //// console.log(err);
     }
     )
-  }
-
-  onLinkChange() {
-    // this.message = this.message + '\n\n' + this.link;
-    this.onMsgChange(this.message);
   }
 
   onReset() {
@@ -153,17 +128,12 @@ export class ComposeSingleMessageComponent implements OnInit {
   }
 
   onTemplateChange(event) {
-    // console.log(event);
     this.msgData.forEach(data => {
-      // console.log(data.mtsTitle);
-      // console.log(this.msgTemplate);
       if (data.mtsTitle === event) {
-        // console.log("inside");
-
         this.message = this.message + '\n\n' + data.mtsMsg;
       }
     });
-    // this.onMsgChange(this.message);
+    this.onMsgChange(this.message);
     // return this.messageService.getMsg().subscribe((data: any) => {
     //   data.map(res => {
     //     if (event === res.mtsTitle) {
@@ -199,46 +169,10 @@ export class ComposeSingleMessageComponent implements OnInit {
   }
 
   onGoBack() {
-    this.router.navigate(['/patientSingleMessage']);
+    this.router.navigate(['/patientInteraciveMessage']);
   }
 
   onNewTemplate() {
-    this.router.navigate(['/singleMessage/create']);
-  }
-
-  selectEvent(item) {
-    // this.nhsLinksData.forEach(element => {
-    //   if (item === element) {
-    //     this.message = this.message + '\n\n' + element;
-    //   } else if (item === element) {
-    //     this.message = this.message + '\n\n' + element;
-    //   }
-    //   this.onMsgChange(this.message);
-    // });
-    // // console.log(item)
-    // this.snoemedService.getSnowmedCodes().subscribe((res: any) => {
-    //   // console.log(res)
-    //   for (let i = 0; i < res.length; i++) {
-    //     if (item === res[i].snowMedCode) {
-    //       this.snowmedCode.push(res[i].snowMedCode);
-    //       this.msgForm.patchValue({ "smcId": res[i].smcId });
-    //     } else if (item === res[i].snowMedCodeDescription) {
-    //       this.snowmedCode.push(res[i].snowMedCode);
-    //       this.msgForm.patchValue({ "smcId": res[i].smcId });
-    //     }
-    //   }
-    // })
-    // this.msgForm.patchValue({ 'mtsCreatedAt': new Date().toISOString() });
-    // this.msgForm.patchValue({ 'mtsCreatedBy': this.username });
-    // this.msgForm.patchValue({ 'mtsFrom': this.username });
-    // this.msgForm.patchValue({ 'mtsLog': this.username });
-  }
-
-  onChangeSearch(val: string) {
-
-  }
-
-  onFocused(e) {
-
+    this.router.navigate(['/ineractiveMessage/create']);
   }
 }

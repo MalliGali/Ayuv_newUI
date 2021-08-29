@@ -18,32 +18,39 @@
                                 <label class="custom-control-label" for="customSwitch1">Use with Test Patient</label>
                             </div>
                             <form #patientForm="ngForm">
-                                <!-- <div class="mb-3 form-group">
-                                    <label for="nhsNo" class="form-label">Use with Test Patient</label>
-                                    <input class="custom-control-input" type="checkbox">
-                                </div> -->
                                 <div class="mb-3 form-group">
                                     <label for="nhsNo" class="form-label">NHS No<sup class="text-danger">*</sup></label>
-                                    <input type="text" class="form-control" id="nhsNo" aria-describedby="nhsNo" placeholder="XXX XXX XXXX" required [(ngModel)]="nhsNo" [ngModelOptions]="{standalone: true}">
-                                    <!-- <div *ngIf="submitted && f.nhsNo.errors" class="invalid-feedback mb-0">
-                                        <div *ngIf="f.nhsNo.errors.required" class="text-right mb-0">NHS No is required
+                                    <input type="text" #nhsNoModel="ngModel" class="form-control" id="nhsNo" aria-describedby="nhsNo" placeholder="XXX XXX XXXX" required [(ngModel)]="nhsNo" [ngModelOptions]="{standalone: true}">
+                                    <div *ngIf="nhsNoModel.invalid && (nhsNoModel.dirty || nhsNoModel.touched)" class="mb-0">
+                                        <div *ngIf="nhsNoModel.errors?.required" class="text-right mb-0">
+                                            <span style="color: red;"><i class="far fa-times-circle"></i>Please Enter NHS number</span>
                                         </div>
-                                    </div> -->
+                                        <div *ngIf="nhsNoModel.errors?.minlength && !nhsNoModel.errors?.required" class="text-right mb-0 ">
+                                            <span style="color: red;"><i class="far fa-times-circle"></i>Please Enter 10 digit NHS Number</span>
+                                        </div>
+                                        <div *ngIf="nhsNoModel.invalid && !nhsNoModel.errors?.minlength && !nhsNoModel.errors?.required" class="text-right mb-0 ">
+                                            <span style="color: red;"><i class="far fa-times-circle"></i>Please Enter only numbers NHS Number</span>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="mb-3">
                                     <div class=" form-group">
                                         <label for="dob">DOB<sup class="text-danger">*</sup></label>
-                                        <input type="date" max="9999-12-31" class="form-control" id="dob" aria-describedby="dob" [(ngModel)]="dob" [ngModelOptions]="{standalone: true}" required>
+                                        <input type="date" #dobModel="ngModel" max="9999-12-31" class="form-control" id="dob" aria-describedby="dob" [(ngModel)]="dob" [ngModelOptions]="{standalone: true}" required>
                                     </div>
-                                    <!-- <div *ngIf="submitted && f.dob.errors" class="invalid-feedback mb-0">
-                                        <div *ngIf="f.nhsNo.dob.required" class="text-right mb-0">DOB is required
+                                    <div *ngIf="dobModel.invalid && (dobModel.dirty || dobModel.touched)" class="mb-0">
+                                        <div *ngIf="dobModel.errors?.required" class="text-right mb-0">
+                                            <span style="color: red;"><i class="far fa-times-circle"></i>Please Enter DOB</span>
                                         </div>
-                                    </div> -->
+                                        <div *ngIf="dobModel.invalid && !dobModel.errors?.required" class="text-right mb-0">
+                                            <span style="color: red;"><i class="far fa-times-circle"></i>Please Enter valid DOB</span>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="mb-3">
                                     <div class="row">
                                         <div class="col">
-                                            <button type="submit" class="btn btn-primary" [disabled]="patientForm.invalid" [class.gray]="patientForm.invalid" (click)='searchData()'><a [routerLink]="['/patientSingleMessage/compose']"></a>Search Patient</button>
+                                            <button type="submit" class="btn btn-primary" [disabled]="patientForm.invalid || nhsNoModel.invalid || dobModel.invalid" [class.gray]="patientForm.invalid || nhsNoModel.invalid || dobModel.invalid" (click)='searchData()'><a [routerLink]="['/patientSingleMessage/compose']"></a>Search Patient</button>
                                         </div>
                                     </div>
                                 </div>
