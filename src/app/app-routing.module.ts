@@ -45,6 +45,10 @@ const routes: Routes = [
     component: LoginBoxedComponent,
   },
   {
+    path: 'reg',
+    component: RegisterBoxedComponent,
+  },
+  {
     path: '',
     component: BaseLayoutComponent,
     children: [
