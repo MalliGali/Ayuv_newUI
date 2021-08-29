@@ -46,3 +46,7 @@ export interface Password {
     newPassword: string,
     confPassword: string
 }
+
+export interface ForgotPassword {
+   emailId : any;
+}

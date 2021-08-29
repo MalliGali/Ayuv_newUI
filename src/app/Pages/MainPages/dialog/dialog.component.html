@@ -1,0 +1,46 @@
+<div class="modal-header">
+    <h6 class="modal-title" id="modal-basic-title"><b>Forgot your Password?</b> </h6>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div>
+        <h6 class="mt-1 mb-0 opacity-8 modal-body-title"><span>Please enter registered mail id to recover your password</span></h6>
+    </div>
+    <div>
+        <form [formGroup]="forgotPasswordForm">
+            <div class="row">
+                <div class="col-md-12">
+                    <fieldset class="form-group" id="__BVID__132">
+                        <div tabindex="-1" role="group"><label for="exampleEmail">Email</label><input id="exampleEmail"
+                                name="email" type="email" formControlName="email" [(ngModel)]="email" placeholder="Email here..." class="form-control" required>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-primary btn-lg" (click)="forgotPassword()">Submit</button>
+                </div>
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-primary btn-lg" (click)="modal.close('Cancel click')">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="divider"></div>
+    <h6 class="mb-0"><a [routerLink]="['/login']" class="text-primary" (click)="modal.close('Save click')">Sign in
+            existing account</a></h6>
+</div>
+
+<!-- <div class="modal-footer">
+    <div class="row">
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-primary btn-lg" (click)="modal.close('Save click')">Submit</button>
+        </div>
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-primary btn-lg" (click)="modal.close('Cancel click')">Cancel</button>
+        </div>
+    </div>
+</div> -->

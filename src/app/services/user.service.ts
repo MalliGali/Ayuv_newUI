@@ -1,9 +1,9 @@
 import { Injectable, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { Password, RegisterUser, UserAyuv, UserAyuvCreate } from '../models/user';
+import { Password, RegisterUser, UserAyuv, UserAyuvCreate, ForgotPassword } from '../models/user';
 import { environment } from '../models/environment';
 
 @Injectable({
@@ -140,6 +140,16 @@ export class UserService{
 
     const headersCreate = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password)});
     return this.httpClient.post<Password>(`${environment.baseUrl}/updatePassword`, userform);
+  }
+
+  forgotPassword(email : string) {
+    let user_cuur = JSON.parse(localStorage.getItem('user'));
+    let username = user_cuur.username;
+    let password = user_cuur.password;
+
+    const headersCreate = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
+    let params = new HttpParams().set('emailId', email);
+    return this.httpClient.post<ForgotPassword>(`${environment.baseUrl}/forgotPassword`,null, {headers: headersCreate, params: params});
   }
 
 }
