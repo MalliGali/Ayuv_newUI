@@ -169,7 +169,7 @@ export class ComposeInteractiveMessageComponent implements OnInit {
   }
 
   onGoBack() {
-    this.router.navigate(['/patientInteraciveMessage']);
+    this.router.navigate(['/patientInteractiveMessage']);
   }
 
   onNewTemplate() {

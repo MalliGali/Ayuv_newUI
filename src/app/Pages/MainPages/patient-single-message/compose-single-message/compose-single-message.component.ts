@@ -18,8 +18,8 @@ export class ComposeSingleMessageComponent implements OnInit {
   private defMsg: string = 'We are ready to take call. Your Appointment is tomorrow.';
   public mobileNo: string = '';
   public msgTemplate: string = '0';
-  public link: string = '0';
-  public nhsLinks: any = [];
+  // public link: string = '0';
+  public nhsLinkTitles: any = [];
   private nhsLinksData: any = [];
   public attachmentFile: any;
   public totalChars: number = 612;
@@ -46,21 +46,43 @@ export class ComposeSingleMessageComponent implements OnInit {
       "templateId": [''],
     })
     this.browserRefresh = browserRefresh;
-    console.log(this.browserRefresh);
-
+    // console.log(this.browserRefresh);
     if (browserRefresh === true) {
       localStorage.clear();
       sessionStorage.removeItem('username');
       this.router.navigate(['login']);
     } else {
-      // this.user = JSON.parse(localStorage.getItem('user'));
-      // this.username = JSON.parse(localStorage.getItem('user')).username;
+      this.user = JSON.parse(localStorage.getItem('user'));
+      this.username = JSON.parse(localStorage.getItem('user')).username;
       this.message = this.defMsg;
       this.onMsgChange(this.message);
       this.getMsgTemplates();
       this.getNHSLinks();
       this.searchData(localStorage.getItem('NHSno'));
     }
+  }
+
+  searchData(id) {
+    // //// console.log(this.nhsNo);
+    // //// console.log(this.dateAsYYYYMMDDHHNNSS(new Date(this.dob)));
+    // return this.http.get('../../../assets/nhs_patient.json').subscribe(
+    //   (res: any) => {
+    patientDetails.map(data => {
+      if (data.nhs_no === id) {
+        // //// console.log(data);
+        this.searchedData.push(data);
+        this.patientName = data.patient_name;
+        this.dob = data.dob;
+        this.nhsNo = data.nhs_no;
+        this.message = this.defMsg;
+      }
+    }
+      // );
+      // },
+      // (err) => {
+      //   //// console.log(err);
+      // }
+    )
   }
 
   getMsgTemplates() {
@@ -82,15 +104,88 @@ export class ComposeSingleMessageComponent implements OnInit {
   }
 
   getNHSLinks() {
-    console.log("getNHSLinks called");
-
     return this.messageService.getNHSLinks().subscribe((res: any) => {
       console.log(res);
-      this.nhsLinksData = res;
-      // res.map(e => {
-      //   this.nhsLinks.push(e);
-      // })
+
+      res.map(e => {
+        // if (e.mtsState === true) {
+        // //// console.log(e);
+        this.nhsLinksData.push(e);
+        this.nhsLinkTitles.push(e.linkName);
+        // this.templateId = e.mtsID;
+        // this.templateType = `NEW_MESSAGE`;
+        // this.msgForm.patchValue({ templateType: this.templateType })
+        // }
+      })
     })
+    // return this.messageService.getMsg().subscribe((res: any) => {
+    //   res.map(e => {
+    //     if (e.mtsState === true) {
+    //       // //// console.log(e);
+    //       this.nhsLinksData.push(e.mtsTitle);
+    //       // this.templateId = e.mtsID;
+    //       // this.templateType = `NEW_MESSAGE`;
+    //       // this.msgForm.patchValue({ templateType: this.templateType })
+    //     }
+    //   })
+    // })
+    // console.log("getNHSLinks called");
+
+    // return this.messageService.getNHSLinks().subscribe((res: any) => {
+    //   console.log(res);
+    //   this.nhsLinksData = res;
+    //   // res.map(e => {
+    //   //   this.nhsLinks.push(e);
+    //   // })
+    // })
+  }
+
+  onLinkChange() {
+    // this.message = this.message + '\n\n' + this.link;
+    this.onMsgChange(this.message);
+  }
+
+  onReset() {
+    this.message = this.defMsg;
+    // this.link = '0';
+    this.msgTemplate = '0';
+    this.onMsgChange(this.message);
+  }
+
+  onMsgChange(msg: string): void {
+    this.remainingChars = this.totalChars - msg.length;
+  }
+
+  onTemplateChange(event) {
+    // console.log(event);
+    this.msgData.forEach(data => {
+      // console.log(data.mtsTitle);
+      // console.log(this.msgTemplate);
+      if (data.mtsTitle === event) {
+        // console.log("inside");
+
+        this.message = this.message + '\n\n' + data.mtsMsg;
+      }
+    });
+    // this.onMsgChange(this.message);
+    // return this.messageService.getMsg().subscribe((data: any) => {
+    //   data.map(res => {
+    //     if (event === res.mtsTitle) {
+    //       this.message = this.defMsg + '\n\n' + res.mtsMsg;
+    //     }
+    //   })
+    //   this.onMsgChange(this.message);
+    // })
+
+  }
+
+
+  onGoBack() {
+    this.router.navigate(['/patientSingleMessage']);
+  }
+
+  onNewTemplate() {
+    this.router.navigate(['/singleMessage/create']);
   }
 
   onMailAttach(event) {
@@ -136,77 +231,21 @@ export class ComposeSingleMessageComponent implements OnInit {
     )
   }
 
-  onLinkChange() {
-    // this.message = this.message + '\n\n' + this.link;
-    this.onMsgChange(this.message);
-  }
 
-  onReset() {
-    this.message = this.defMsg;
-    // this.link = '0';
-    this.msgTemplate = '0';
-    this.onMsgChange(this.message);
-  }
-
-  onMsgChange(msg: string): void {
-    this.remainingChars = this.totalChars - msg.length;
-  }
-
-  onTemplateChange(event) {
+  selectEvent(event) {
     // console.log(event);
-    this.msgData.forEach(data => {
+
+    this.nhsLinksData.forEach(data => {
       // console.log(data.mtsTitle);
       // console.log(this.msgTemplate);
-      if (data.mtsTitle === event) {
+      if (data.linkName === event) {
         // console.log("inside");
 
-        this.message = this.message + '\n\n' + data.mtsMsg;
+        this.message = this.message + '\n\n' + data.linkURL;
       }
     });
-    // this.onMsgChange(this.message);
-    // return this.messageService.getMsg().subscribe((data: any) => {
-    //   data.map(res => {
-    //     if (event === res.mtsTitle) {
-    //       this.message = this.defMsg + '\n\n' + res.mtsMsg;
-    //     }
-    //   })
-    //   this.onMsgChange(this.message);
-    // })
 
-  }
 
-  searchData(id) {
-    // //// console.log(this.nhsNo);
-    // //// console.log(this.dateAsYYYYMMDDHHNNSS(new Date(this.dob)));
-    // return this.http.get('../../../assets/nhs_patient.json').subscribe(
-    //   (res: any) => {
-    patientDetails.map(data => {
-      if (data.nhs_no === id) {
-        // //// console.log(data);
-        this.searchedData.push(data);
-        this.patientName = data.patient_name;
-        this.dob = data.dob;
-        this.nhsNo = data.nhs_no;
-        this.message = this.defMsg;
-      }
-    }
-      // );
-      // },
-      // (err) => {
-      //   //// console.log(err);
-      // }
-    )
-  }
-
-  onGoBack() {
-    this.router.navigate(['/patientSingleMessage']);
-  }
-
-  onNewTemplate() {
-    this.router.navigate(['/singleMessage/create']);
-  }
-
-  selectEvent(item) {
     // this.nhsLinksData.forEach(element => {
     //   if (item === element) {
     //     this.message = this.message + '\n\n' + element;

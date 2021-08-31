@@ -105,8 +105,8 @@
                                         <div class="col-2">
                                             <label for="link" class="form-label font-weight-bold">Link</label>
                                         </div>
-                                        <div class="col-10">
-                                            <!-- <ng-autocomplete [data]="nhsLinks" [searchKeyword]="nhsLinkDesc" placeholder="Enter the Link" (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+                                        <div class="col-9" style="border: #0065b8;">
+                                            <ng-autocomplete [data]="nhsLinkTitles" [searchKeyword]="nhsLinkDesc" placeholder="Enter the Link" (selected)='selectEvent($event)' (inputChanged)='onChangeSearch($event)' (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
                                             </ng-autocomplete>
 
                                             <ng-template #itemTemplate let-item>
@@ -115,13 +115,16 @@
 
                                             <ng-template #notFoundTemplate let-notFound>
                                                 <div [innerHTML]="notFound"></div>
-                                            </ng-template> -->
-                                            <select class="form-control" [(ngModel)]="link" [ngModelOptions]="{standalone: true}" (change)="onLinkChange()">
+                                            </ng-template>
+                                            <!-- <select class="form-control" [(ngModel)]="link" [ngModelOptions]="{standalone: true}" (change)="onLinkChange()">
                                               <option selected value="0">Select</option>
                                               <option value="Link 123">Link 123</option>
                                               <option value="Link 456">Link 456</option>
                                               <option value="Link 789">Link 789</option>
-                                            </select>
+                                            </select> -->
+                                        </div>
+                                        <div class="col-1 pt-2">
+                                            <i class="fas fa-search" style="cursor: pointer;"></i>
                                         </div>
                                     </div>
                                 </div>
