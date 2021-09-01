@@ -191,6 +191,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     HttpClientModule,
     MatTabsModule,
     MatDividerModule,
+    MatSnackBarModule,
   ],
   providers: [
     {
