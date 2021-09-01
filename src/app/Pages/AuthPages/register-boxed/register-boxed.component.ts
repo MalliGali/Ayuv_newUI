@@ -47,7 +47,7 @@ export class RegisterBoxedComponent implements OnInit {
       "practice": [''],
       "gpId": [0],
       "roleId": [3],
-      "registrationStatus": ['Approved'],
+      "registrationStatus": ['Pending'],
       "username": ['', Validators.required],
       "password": ['', [Validators.required, Validators.minLength(6)]],
       "active": [true],
@@ -77,20 +77,20 @@ export class RegisterBoxedComponent implements OnInit {
       },
     ]
   }
-  validation(event){
+  // validation(event){
     // //// console.log(event)
-    let emailValid = this.userForm.get('nhsEmailId');
-    let str = event;
-    let last = str.split("@").pop();
+    // let emailValid = this.userForm.get('nhsEmailId');
+    // let str = event;
+    // let last = str.split("@").pop();
     // //// console.log(last)
-    if(last === 'nhs.net') {
-      return emailValid.setErrors(null)
-    } else if(last === 'nhs.uk') {
-      return emailValid.setErrors(null)
-    } else {
-      return emailValid.setErrors({'incorrect': true})
-    }
-  }
+  //   if(last === 'nhs.net') {
+  //     return emailValid.setErrors(null)
+  //   } else if(last === 'nhs.uk') {
+  //     return emailValid.setErrors(null)
+  //   } else {
+  //     return emailValid.setErrors({'incorrect': true})
+  //   }
+  // }
   get f() { return this.userForm.controls; }
   passwordErrorMatcher = {
     isErrorState: (control: FormControl, form: FormGroupDirective): boolean => {
@@ -114,14 +114,16 @@ export class RegisterBoxedComponent implements OnInit {
   //   // //// console.log(Number(event.target.value));
   // }
   onSubmit() {
+    console.log("form values ", this.userForm)
     console.log("hitting")
-    this.submitted = true;
-    this.isLoading = true;
+    console.log(this.userForm.value);
     // stop here if form is invalid
     if (this.userForm.invalid) {
         return;
     }
-     console.log(this.userForm.value);
+    this.submitted = true;
+    this.isLoading = true;
+     
     return this.userService.registerAyuvUser(this.userForm.value).subscribe(
       (res) => {
         console.log(res);
