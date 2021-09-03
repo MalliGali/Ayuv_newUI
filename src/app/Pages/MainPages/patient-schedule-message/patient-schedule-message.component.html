@@ -50,7 +50,7 @@
                                 <div class="mb-3">
                                     <div class="row">
                                         <div class="col">
-                                            <button type="submit" class="btn btn-primary" [disabled]="patientForm.invalid || nhsNoModel.invalid || dobModel.invalid" [class.gray]="patientForm.invalid || nhsNoModel.invalid || dobModel.invalid" (click)='searchData()'><a [routerLink]="['/patientSingleMessage/compose']"></a>Search Patient</button>
+                                            <button type="button" class="btn btn-primary" [disabled]="patientForm.invalid || nhsNoModel.invalid || dobModel.invalid" [class.gray]="patientForm.invalid || nhsNoModel.invalid || dobModel.invalid" (click)='searchData()'>Search Patient</button>
                                         </div>
                                     </div>
                                 </div>

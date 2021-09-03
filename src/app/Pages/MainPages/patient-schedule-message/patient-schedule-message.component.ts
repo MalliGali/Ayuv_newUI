@@ -34,7 +34,8 @@ export class PatientScheduleMessageComponent implements OnInit {
     let index = patientDetails.findIndex(person => person.nhs_no === this.nhsNo && person.dob === this.dateAsYYYYMMDDHHNNSS(new Date(this.dob)));
     console.log(index);
     if (index != -1) {
-      Swal.fire('Screen Under Development!')
+      // Swal.fire('Screen Under Development!')
+      this.router.navigate([`/patientScheduleMessage/compose/${this.nhsNo}`]);
     } else {
       Swal.fire('No User Found!')
     }

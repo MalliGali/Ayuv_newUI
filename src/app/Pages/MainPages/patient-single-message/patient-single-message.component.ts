@@ -38,11 +38,11 @@ export class PatientSingleMessageComponent implements OnInit {
     let index = patientDetails.findIndex(person => person.nhs_no === this.nhsNo && person.dob === this.dateAsYYYYMMDDHHNNSS(new Date(this.dob)));
     console.log(index);
     if (index != -1) {
-      localStorage.setItem('NHSno', patientDetails[index].nhs_no);
+      // localStorage.setItem('NHSno', patientDetails[index].nhs_no);
       // index = 0;
       // this.router.navigateByUrl('/patientSingleMessage/compose');
       // this.router.navigate(['/patientSingleMessage/compose']);
-      this.router.navigate([`/patientSingleMessage/compose`]);
+      this.router.navigate([`/patientSingleMessage/compose/${this.nhsNo}`]);
     } else {
       Swal.fire('No User Found!')
     }
