@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { MessageService } from 'src/app/services/msg.service';
@@ -35,8 +35,10 @@ export class ComposeSingleMessageComponent implements OnInit {
   private msgForm: FormGroup;
   public nhsLinkDesc = 'NHS Link here';
   public acceptResponse: boolean = false;
+  currentEditId: any;
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private messageService: MessageService, private http: HttpClient) { }
+  constructor(private router: Router, private formBuilder: FormBuilder,
+    private routeActv: ActivatedRoute,private messageService: MessageService, private http: HttpClient) { }
 
   ngOnInit() {
     this.msgForm = this.formBuilder.group({
@@ -47,19 +49,22 @@ export class ComposeSingleMessageComponent implements OnInit {
     })
     this.browserRefresh = browserRefresh;
     // console.log(this.browserRefresh);
-    if (browserRefresh === true) {
-      localStorage.clear();
-      sessionStorage.removeItem('username');
-      this.router.navigate(['login']);
-    } else {
+    // if (browserRefresh === true) {
+    //   localStorage.clear();
+    //   sessionStorage.removeItem('username');
+    //   this.router.navigate(['login']);
+    // } else {
       this.user = JSON.parse(localStorage.getItem('user'));
       this.username = JSON.parse(localStorage.getItem('user')).username;
       this.message = this.defMsg;
       this.onMsgChange(this.message);
       this.getMsgTemplates();
       this.getNHSLinks();
-      this.searchData(localStorage.getItem('NHSno'));
-    }
+      this.routeActv.paramMap.subscribe(params => {
+        this.currentEditId = params.get('id');
+        this.searchData(this.currentEditId);
+      });
+    // }
   }
 
   searchData(id) {

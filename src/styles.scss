@@ -23,7 +23,10 @@ body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-
 body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-create-int-message > div > div > div.col-8 > div,
 body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-edit-single-message > div > div > div.col-8 > div,
 body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-edit-int-message > div > div > div.col-8 > div,
-body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-schedule-message-sent > div > div > div.col-10 > div.card
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-schedule-message-sent > div > div > div.col-10 > div.card,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-patient-schedule-message > div > div > div.col-6 > div,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-compose-single-message > div > div > div.col-10.mb-3 > div,
+body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-patient-single-message > div > div > div.col-6 > div
 {
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
@@ -162,3 +165,13 @@ body > app-root > app-base-layout > div > div.app-main__outer > div > div > app-
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
